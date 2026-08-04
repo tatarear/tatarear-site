@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tatarear · Tec de Monterrey Generación 2026</title>
+<meta name="description" content="Discurso de graduación de Leopoldo Cedillo Villarreal a la Generación 2026 del Tec de Monterrey — y el Muro Tatarear, un espacio para dar y pedir ayuda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300..600;1,400..600&family=IBM+Plex+Mono:wght@400;500&family=Work+Sans:wght@300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#inicio" class="nav-logo">tatarear <span>· Tec de Monterrey Generación 2026</span></a>
+  <div class="nav-links">
+    <a href="#reto" class="nav-cta">El Reto</a>
+    <a href="#discurso">Discurso</a>
+    <a href="#semblanza">Semblanza</a>
+  </div>
+</nav>
+
+<div class="hero-wrap">
+  <header id="inicio" class="hero">
+    <div class="hero-video">
+      <iframe src="https://player.vimeo.com/video/1210886763?h=5830769794&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Orador Huésped_06 Julio"></iframe>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="dict-card">
+        <span class="dict-eyebrow">Discurso de Graduación Tec de Monterrey · Julio 2026</span>
+        <div class="dict-word">tatarear</div>
+        <div class="dict-pos"><em>verbo intransitivo/transitivo</em> · México</div>
+        <p class="dict-tagline">En su discurso, Polo lanzó el Reto Tatara: tatarea por alguien más.</p>
+        <div class="dict-etym"><strong>Etimología:</strong> fusión de <em>tararear</em> (canturrear una melodía de forma espontánea y alegre) y <em>tata</em> (voz afectiva para "abuelo" en varias regiones de México y Latinoamérica).</div>
+        <ol class="dict-defs">
+          <li>Dar con generosidad e impacto, atendiendo de forma consciente las necesidades específicas de quien recibe. Hacer el bien mirando a quién, y a quién necesita qué.</li>
+          <li>Dar con amor y alegría lo que el otro realmente necesita, de manera espontánea, como quien camina contento y sin querer se le escapa una melodía.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="cue"><span class="cue-line"></span>Desliza para comenzar</div>
+  </header>
+</div>
+
+<section id="reto" class="reto">
+  <div class="reto-inner">
+    <span class="eyebrow on-navy"><span class="eyebrow-line"></span>Conecta</span>
+    <h2>Tatarea donde estás</h2>
+    <p class="reto-sub">Ofrece o pide una mano</p>
+    <div class="reto-lede">
+      <p>En su discurso, Polo retó a la generación 2026 a practicar <em>tatarear</em>: dar con generosidad e impacto a quienes tienen cerca, atendiendo lo que de verdad necesitan. Este espacio conecta a quienes tienen algo que ofrecer con quienes lo están buscando — mentoría, empleo, un consejo, una mano.</p>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" data-mode="ofrezco">Ofrezco ayuda</div>
+      <div class="tab" data-mode="busco">Busco ayuda</div>
+    </div>
+
+    <div class="reto-grid">
+      <form id="conecta-form" data-modo="Ofrezco">
+        <div class="field">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre">
+        </div>
+        <div class="field">
+          <label for="categoria">Categoría</label>
+          <select id="categoria" name="categoria">
+            <option>Mentoría</option>
+            <option>Empleo</option>
+            <option>Educación</option>
+            <option>Salud</option>
+            <option>Negocio / emprendimiento</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="ciudad">Ciudad / región</label>
+          <input type="text" id="ciudad" name="ciudad" placeholder="¿Desde dónde tatareas?">
+        </div>
+        <div class="field">
+          <label id="desc-label" for="descripcion">¿Qué ofreces?</label>
+          <textarea id="descripcion" name="descripcion" rows="4" required placeholder="Describe brevemente lo que ofreces y a quién puede servirle."></textarea>
+        </div>
+        <div class="field">
+          <label for="contacto">Contacto (correo o teléfono)</label>
+          <input type="text" id="contacto" name="contacto" placeholder="Cómo pueden encontrarte">
+        </div>
+        <label class="consent">
+          <input type="checkbox" id="consiente" name="consiente" required>
+          <span>He leído y acepto el <a href="#" data-legal="aviso">Aviso de Privacidad</a> y los <a href="#" data-legal="terminos">Términos de Uso</a>. Entiendo que mi correo electrónico será visible para otras personas usuarias interesadas en dar o recibir ayuda, y acepto ser contactado(a) con ese fin.</span>
+        </label>
+        <button type="submit" class="submit-btn" disabled>Publicar en el muro</button>
+        <div class="form-note" id="conecta-note" hidden></div>
+      </form>
+
+      <div>
+        <div class="muro-head"><span>Muro de la generación</span><span id="muro-count">0 publicaciones</span></div>
+        <div class="muro-cols">
+          <div>
+            <div class="muro-col-title">Ofrecen ayuda</div>
+            <div id="offer-posts"></div>
+          </div>
+          <div>
+            <div class="muro-col-title">Buscan ayuda</div>
+            <div id="seek-posts"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="discurso" class="discurso">
+  <div class="discurso-inner">
+    <span class="eyebrow"><span class="eyebrow-line"></span>Discurso</span>
+    <h2>Tatarear</h2>
+    <div class="discurso-body">
+      <p>En este momento, mientras estamos aquí sentados, hay 800 millones de personas en el mundo que no saben si van a comer mañana y hay más gente muriendo de soledad que de hambre.</p>
+      <p>¡Vaya manera de empezar un mensaje de graduación!, no les cuento esto para aguitarles la ceremonia. Se los platico porque lo que hoy les voy a compartir tiene todo que ver con eso y con ustedes.</p>
+      <p>Pero eso viene después. Primero es lo primero, y lo primero es celebrar a los que están sentados aquí en la cancha.</p>
+      <p>Es un honor estar aquí en mi alma mater. Muy honrado con la invitación. Soy de Monclova, Coahuila, mejor conocido como Monclohollywood, matrícula 160452. En mis tiempos no había aire acondicionado en los salones, se fumaba dentro de los mismos y no había internet. Ustedes nacieron con todo esto resuelto. Y aun así, puedo apostar que hoy sienten exactamente lo mismo que yo sentí ese día, hace 34 años, mitad euforia, mitad terror. Bienvenidos al club. Ahí les va un spoiler: si se puede y les va a ir muy bien.</p>
+      <p>¡Qué increíble viaje de cuatro años están por concluir! Bueno, la mayoría lo hizo en 4 años. Porque hay quienes hicieron intercambios y concentraciones adicionales, y hay quienes le agarraron tanto cariño a ciertas materias que las cursaron varias veces.</p>
+      <p>Pero todos pasaron por las mismas estaciones: desde la primera lavadora donde descubrieron que la ropa roja y la blanca no son amigas, llegar a la clase de las siete con la marca de la almohada en la cara, abrir el refri a las once de la noche con hambre y encontrar media cebolla, un bote de cátsup, y un six de cerveza, tener que ser el terapeuta de tu roomie, las desveladas interminables para entregar un proyecto, además de tener que aguantar al tipo que se hizo pato durante todo el proyecto. Y qué me dicen de la última parada hace dos meses: tus papás bien contentos porque ya firmaste el título sin que supieran que no habías recibido los resultados del CENEVAL y todavía te faltaban 2 exámenes por presentar y 3 proyectos por entregar.</p>
+      <p>Tuvieron un recorrido lleno de aprendizajes, anécdotas y nuevos amigos, algunos llegaron con raspones, otros sin, pero todos los aquí presentes lograron llegar hoy a este destino, el esfuerzo encontró su recompensa y eso hay que celebrarlo.</p>
+      <p class="pull">¡Felicidades, graduandos!</p>
+      <p>Abro paréntesis: hay personas en esta ceremonia que llegaron aquí desde más lejos que los demás, no en kilómetros, pero sí en obstáculos. Mis queridos Líderes del Mañana. Han sido mi inspiración. Tienen mi cariño, y mi respeto: no están solos. Estaré presente cuando me necesiten. Cierro paréntesis.</p>
+      <p>Ustedes son la generación de la inteligencia artificial. A mí me tocó ser la generación del internet.</p>
+      <p>Recién salido del Tec, había cursos para aprender a usar Internet, lo que hoy equivale a ofrecer un curso para aprender a respirar. En uno de esos cursos, un instructor con cara de apocalipsis nos dijo: "Internet va a revolucionar todo. Muchos empleos van a desaparecer."</p>
+      <p>Tenía razón. Y no tenía razón. Sí desaparecieron empleos, incluso desaparecieron industrias. Pero hoy tenemos trabajos que en 1995 sonaban a ciencia ficción: "influencer", "creador de contenido", "growth hacker". Y ningún egresado del Tec se quedó sin comer, encontraron o crearon trabajos para esa nueva economía. Hoy es imposible imaginarse el mundo sin Instagram, TikTok, Spotify, Uber, WhatsApp, Netflix y Amazon.</p>
+      <p>El hype de la inteligencia artificial va por el mismo camino. Así que no se preocupen. Porque gracias a lo que experimentaron en el Tec desarrollaron habilidades transversales que no se vuelven obsoletas. La capacidad de aprender a desaprender y volver a aprender, el pensamiento crítico, el poder trabajar en equipo. Eso no lo reemplaza ningún algoritmo. Gracias a esas habilidades van a poder bailar al son que les toquen, y en muchos casos van a ser ustedes quienes escriban esos sones.</p>
+      <p>Mientras preparaba este discurso me puse a filosofar. El conocimiento y la tecnología no tienen intencionalidad, nosotros los humanos se la damos. Y cuando veo cómo la estamos usando, identifico tres grandes retos que enfrentamos como humanidad.</p>
+      <p>El primero es la desigualdad. Acabamos de presenciar al primer billonario (trillonario en inglés) de la historia que, dicho sea de paso, sin internet no tendría un solo peso. Y al mismo tiempo, 800 millones de personas viven con menos de tres dólares al día. La tecnología que creó esa fortuna es la misma que está acentuando esa brecha.</p>
+      <p>El segundo es la polarización. La polarización existe cuando creemos que el mundo se divide en dos grupos: los que piensan como yo… y los que están equivocados. Las redes sociales no inventaron esto, simplemente descubrieron que el enojo genera más clics que la empatía. Son amplificadoras de nuestros sesgos.</p>
+      <p>El tercero es la falta de sentido. La misma tecnología que nos ayudó a vivir treinta años más también nos trajo más soledad, más ansiedad, más depresión, y más personas preguntándose para qué vivir. Tenemos más años para vivir y menos razones para vivirlos. Algo no está cuadrando.</p>
+      <p>Perfecto, y ahora ¿cómo nos comemos todo esto? El común denominador de estos 3 grandes retos es la falta de humanidad.</p>
+      <p>Y esto conlleva a la siguiente pregunta: ¿qué significa ser humano?</p>
+      <p>Hice una lista de las personas que considero más humanas. Mi madre, profesores que me inspiraron, mi guía espiritual, líderes que transformaron sociedades. Traté de encontrar qué tenían en común. ¿Era el dinero? No. ¿El poder? Tampoco. ¿El talento? Sí, pero no. Lo que encontré fue algo mucho más simple: todos compartían una obsesión por mejorar la vida de alguien más.</p>
+      <p>Y ahí apareció otro dilema. No encontraba una palabra que capturara esa idea. Compasión era parte. Servir no bastaba. Generosidad se quedaba corta. Busqué y no encontré. Así que decidí inventarla.</p>
+      <p class="pull">La palabra es tatarear.</p>
+      <p>Tatarear significa generosidad con impacto: en palabras llanas, dar algo y asegurarse que pegue el chicle.</p>
+      <p>Mi abuela decía: haz el bien sin mirar a quien. Tatarear propone haz el bien conociendo y atendiendo las necesidades del quien.</p>
+      <p>Tatarear suena como a tararear, lo que haces cuando vas caminando alegre y sin querer te sale una melodía. Lleva la palabra tata, que en muchos lugares quiere decir abuelo; esta palabra sabe al amor de nuestros abuelos. Y suena a terapear, porque necesitamos cambiar aprendizajes adquiridos para poder ser más efectivos en el dar. Tatarear es dar con amor y con alegría lo que el otro necesita.</p>
+      <p>No la busquen en Google, acabo de inventarla hoy, para esta ceremonia. Es, desde ya, nuestra palabra.</p>
+      <p>Yo tatareo. Tú tatareas. Él tatarea. Nosotros tatareamos.</p>
+      <p>¡No puede ser!, último día en el Tec y todavía nos recetan un concepto nuevo. Abracémoslo, créanme, les va a servir.</p>
+      <p>Avanzamos como humanidad gracias a que muchas personas tatarearon antes que nosotros. Gente que puso al ser humano en el centro de sus decisiones y con eso le dio intencionalidad a la tecnología. Gracias a esto existen las vacunas, las universidades, las ciudades y todo lo que llamamos civilización.</p>
+      <p>En noviembre conocí a una gran persona, Dan Meyer. En 2009 vendió su negocio y abrió una fábrica en la zona más peligrosa de Cincinnati porque detectó que el desempleo era el principal problema.</p>
+      <p>La mayoría de los candidatos eran exconvictos. Dan los contrató, le llamó a su programa segunda oportunidad. Semanas después, la rotación era altísima. La reacción fácil hubiera sido: "qué mal agradecidos." Pero Dan se hizo la pregunta: ¿cuál es la causa raíz?</p>
+      <p>Descubrió que no tenían dónde vivir, ni transporte, ni crédito. Fue resolviendo cada problema, uno por uno, sin dejar de ser rentable.</p>
+      <p>Rayshun Holt, que pasó 18 años en prisión y lleva ocho en la fábrica, lo resume mejor que nadie: "Dicen que esto fue una segunda oportunidad. Para mí fue la primera en mi vida."</p>
+      <p>Lo que hizo Dan fue tatarear. No atacó los síntomas; buscó la causa raíz del problema. También enfrentó su mayor sesgo: pensar que una vez delincuente, siempre delincuente.</p>
+      <p>La forma de tatarear de Dan se llama capitalismo consciente: hacer el pastel más grande para que todos sus grupos de interés, incluidos los exconvictos, disfruten de una rebanada más grande.</p>
+      <p>Seamos honestos: esta idea no nació con Dan, ni con el capitalismo consciente. Es mucho más antigua. A mí me inspira una persona que vivió hace dos mil años y que nos invitaba a tatarearnos los unos a los otros. Aprendí a tatarear viendo a mi madre. Hace seis años me hice conductor de Uber, convencido de que sólo se puede tatarear bien cuando se aprende a escuchar mejor, y escuchar te permite eliminar sesgos.</p>
+      <p>Hace dos años renuncié a la dirección general de una gran empresa. Mucha gente me preguntó: "¿Por qué dejarías un puesto así?"</p>
+      <p>La respuesta es que descubrí algo demasiado tarde: tatarear me da más sentido y me hace sentir más pleno que cualquier cargo que haya tenido. Lo descubrí haciendo proyectos sociales que poco tenían que ver con mi trabajo y, cuando lo entendí, ya no me pude hacer pato.</p>
+      <p>No fue fácil soltar. Los incentivos de la sociedad premian más el acumular que el tatarear, y uno ha comprado estas ideas más de lo que uno quisiera admitir.</p>
+      <p>Mi esposa y yo nos fuimos un año a Harvard a aprender a tatarear mejor. Hoy dedico gran parte de mi tiempo a un proyecto llamado "Florece desde donde tú estás". Ayudamos a jóvenes del México rural a crear oportunidades donde otros sólo ven carencias.</p>
+      <p>Nunca me he arrepentido de tatarear. Me he arrepentido de no haber entendido las necesidades del otro o de no haber tatareado lo suficiente. Tatareo en silencio, a menos que al abrirlo pueda inspirar a alguien más a tatarear. No soy la Madre Teresa de Calcuta. De hecho, si le preguntan a mis hijos, probablemente les dirán que a ese señor todavía le falta tatarear más en casa.</p>
+      <p>¿Esto de tatarear tiene algún beneficio para el que tatarea?</p>
+      <p>Sí, y lo dice la ciencia: investigadores de Harvard, British Columbia, Oxford, Cambridge y Wisconsin concluyeron que tatarear —bueno, ellos tienen otros sinónimos para la palabra— genera felicidad. Es mejor tatarear que ser tatareado. Te da paz interior, duermes mejor, te enfermas menos, eres más feliz en tu trabajo, y tienes relaciones más duraderas. Tatarear reduce los prejuicios entre grupos que se perciben como adversarios. Ah, y además es contagioso.</p>
+      <p>Llegué a la conclusión de que tatarear tiene más propiedades que el nopal.</p>
+      <p>Ustedes dirán: yo qué me estoy graduando, ¿qué puedo tatarear? No tengo una fábrica, es más, todavía no tengo chamba. Se me ocurre utilizar el HTC para poner esto en práctica: H de Humanidad, T de Tiempo y C de Conocimiento.</p>
+      <p>Primero — tatarea tu humanidad. Como conductor de Uber descubrí que hay pasajeros que nunca te miran a los ojos. Para ellos eres invisible. Eso duele más que una grosería. Un buenos días, una sonrisa, ver a los ojos a alguien que el mundo ha decidido ignorar, eso es una forma de tatarear.</p>
+      <p>Segundo — tatarea tu tiempo. Llama a tu abuelo este fin de semana. Solo para preguntarle cómo está y decirle lo mucho que lo extrañas. Te vas a dar cuenta de la capacidad que tienes de iluminar otras vidas.</p>
+      <p>Tercero — tatarea tu conocimiento. Es el único bien que, al compartirse, no empobrece a quien lo da y sí enriquece a quien lo recibe. Mañana mismo puedes enseñarle a alguien que aún no ha descubierto cómo usar la inteligencia artificial.</p>
+      <p>Utiliza tu HTC (Humanidad, Tiempo y Conocimiento) a sabiendas de que hay N formas de tatarear, desde pequeños detalles hasta grandes esfuerzos, el dinero viene después. Lo importante es saber que tatarear es un músculo. Y como todo músculo, mientras más lo ejercitas, más crece.</p>
+      <p>Por último, quiero proponerles el Reto Tatara. Ninguno de ustedes llegó aquí solo; alguien tatareó por ustedes. De hecho, desde aquí alcanzo a ver a varios de sus cómplices que conspiraron para que tú estuvieras aquí.</p>
+      <p class="pull small">El reto es que, en 25 años, tatareen por alguien más, para que gracias a ustedes, alguien pueda venir a estudiar al Tec.</p>
+      <p>Invítenme a su reunión de generación de 25 años. Si no llego, mando a uno de mis hijos en mi representación para ver cómo nos fue con el reto. Y mientras tanto, cada vez que nos topemos, en la calle, en los tacos, o en el antro, la pregunta que me tienen que hacer es: ¿ya tatareaste hoy?</p>
+      <p>¿Y si sí? ¿Y si sí? ¿Y si todos tatareáramos al mismo tiempo? Este mundo sería irreconocible. Podríamos poner a la tecnología al servicio del ser humano. Las desigualdades desaparecerían. La polarización se reduciría. La gente encontraría más sentido a su vida. Así que empecemos, contagiemos a nuestra familia, a nuestra comunidad, a nuestro México y nuestro planeta.</p>
+      <p>Al final no seremos recordados por lo que acumulamos. Seremos recordados por lo que tatareamos.</p>
+      <p class="pull">Sin tatara, no hay paraíso.</p>
+      <p>Les deseo una vida llena de tatareo, y por lo tanto, una vida llena de felicidad. Dios los bendiga. Felicidades.</p>
+    </div>
+  </div>
+</section>
+
+<section id="semblanza" class="semblanza">
+  <div class="semblanza-inner">
+    <span class="eyebrow"><span class="eyebrow-line"></span>Orador invitado</span>
+    <h2>Leopoldo "Polo" Cedillo Villarreal</h2>
+    <div>
+      <div class="semblanza-photo">
+        <img src="assets/img/speaker.jpg" alt="Leopoldo Cedillo durante su discurso">
+        <div class="semblanza-caption">Leopoldo Cedillo durante su discurso de graduación, julio 2026.</div>
+      </div>
+      <div class="semblanza-body">
+        <p>Leopoldo Cedillo Villarreal, mejor conocido como Polo Cedillo, es orgulloso egresado del Tecnológico de Monterrey, donde estudió contaduría pública. También es Certified Public Accountant en el estado de Texas. Tiene una maestría en administración por Stanford University y recientemente concluyó el programa Advanced Leadership Initiative de Harvard University.</p>
+        <p>Durante veintinueve años desarrolló su carrera profesional en Grupo Proeza, organización mexicana con presencia global en los sectores automotriz, agroindustrial, salud y capital emprendedor. Los últimos 15 años ocupó posiciones de director general, primero como CEO de Metalsa y posteriormente como CEO de Proeza. Actualmente es consejero independiente de empresas como Bocar, Cuprum, Grupo Industrial Saltillo y Merco y mantiene una participación activa en el TEC.</p>
+        <p class="clear">Preside el Consejo de la Escuela de Ingeniería y forma parte del Consejo Académico y de Investigación, así como del Consejo del Grupo Educativo. Es padrino de la novena generación de líderes del mañana que se gradúa hoy. A lo largo de su trayectoria, también impulsó el desarrollo económico de Nuevo León, presidiendo el clúster automotriz y siendo fundador de Nuevo León 4.0, además de crear en CAINTRA el programa Más Pymex, iniciativa que ha apoyado a más de 100 pequeñas y medianas empresas mexicanas.</p>
+        <p>En 2024, sin embargo, tomó una decisión poco común para alguien con esa trayectoria; renunció a su carrera ejecutiva y se mudó a Harvard durante un año para darle forma, junto con su esposa Esther, a un proyecto que busca crear oportunidades para jóvenes de comunidades rurales de México, bajo una idea sencilla pero poderosa: florece desde donde estés. Lo más importante es que hasta esta mañana sigue felizmente casado con esa misma Esther, es padre de tres hijos, Polo, Ana Paula y Marcelo, y mantiene una calificación de cinco estrellas como conductor de Uber.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-row">
+    <div>Tecnológico de Monterrey · Campus Monterrey</div>
+    <div>Ceremonia de graduación · Julio 2026</div>
+  </div>
+  <div class="footer-links">
+    <a href="#" data-legal="aviso">Aviso de privacidad</a>
+    <a href="#" data-legal="terminos">Términos de uso</a>
+  </div>
+</footer>
+
+<div class="legal-overlay" id="legal-aviso" hidden>
+  <div class="legal-box">
+    <button class="legal-close" aria-label="Cerrar">✕</button>
+    <div class="legal-kicker">Tec de Monterrey · Generación 2026</div>
+    <h1>Aviso de Privacidad</h1>
+    <p class="legal-updated"><strong>Última actualización:</strong> 29 de julio de 2026</p>
+    <h2>1. Identidad y domicilio del Responsable</h2>
+    <p><strong>Instituto Tecnológico y de Estudios Superiores de Monterrey</strong> (en adelante, "Tecnológico de Monterrey" o "nosotros"), con domicilio en Av. Eugenio Garza Sada 2501 Sur, Col. Tecnológico, C.P. 64849, Monterrey, Nuevo León, México, es el Responsable del tratamiento de tus datos personales, en términos de la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) y su Reglamento.</p>
+    <p>Para cualquier duda relacionada con este Aviso de Privacidad puedes contactarnos en: tatarear@servicios.tec.mx.</p>
+    <h2>2. Datos personales que recabamos</h2>
+    <p>A través del formulario del tablón de ayuda ("el Tablón"), recabamos los siguientes datos personales que tú nos proporcionas directamente:</p>
+    <ul><li>Nombre</li><li>Correo electrónico o teléfono</li><li>Descripción del tipo de ayuda que ofreces o necesitas</li><li>Ciudad o región</li></ul>
+    <p><strong>No solicitamos ni debes incluir en tu publicación datos personales sensibles</strong> (origen étnico o racial, estado de salud, información genética, creencias religiosas, filosóficas o morales, afiliación sindical, opiniones políticas, preferencia sexual, entre otros) salvo que tú mismo decidas compartirlos voluntariamente dentro del texto de tu publicación, bajo tu propia responsabilidad. Te recomendamos evitar incluir este tipo de información.</p>
+    <h2>3. Finalidades del tratamiento</h2>
+    <p>Tus datos personales serán utilizados para las siguientes finalidades, necesarias para el servicio que solicitas:</p>
+    <ul>
+      <li>Publicar tu mensaje en el Tablón, previa revisión y aprobación por parte de nuestro equipo de moderación.</li>
+      <li>Permitir que otras personas usuarias que deseen dar o recibir ayuda se pongan en contacto contigo a través de tu correo electrónico o teléfono.</li>
+      <li>Contactarte nosotros mismos para validar tu publicación, notificarte su aprobación o rechazo, o darle seguimiento.</li>
+      <li>Prevenir usos indebidos, fraudes o abusos del Tablón, y moderar el contenido conforme a nuestros Términos de Uso.</li>
+    </ul>
+    <h2>4. Consentimiento para ser contactado(a)</h2>
+    <p>Al proporcionar tu correo electrónico o teléfono y enviar tu publicación, <strong>aceptas expresamente que:</strong></p>
+    <ul>
+      <li>Tu correo electrónico o teléfono podrá ser compartido con otra persona usuaria del Tablón cuando esta desee ofrecerte ayuda o solicitar la ayuda que tú ofreces, únicamente con ese propósito.</li>
+      <li>Podrás recibir mensajes de dichas personas directamente en tu correo o teléfono.</li>
+      <li>Nosotros podremos contactarte para fines de moderación, verificación o soporte relacionados con tu publicación.</li>
+    </ul>
+    <p>Puedes retirar este consentimiento en cualquier momento (ver sección 8), lo cual implicará la eliminación de tu publicación del Tablón.</p>
+    <h2>5. Transferencia de datos</h2>
+    <p>Como se describe en la sección 4, tu correo electrónico o teléfono se transfiere/comparte con otras personas usuarias del Tablón <strong>únicamente cuando exista interés mutuo de contacto para dar o recibir ayuda</strong>, y solo mientras tu publicación esté activa. No vendemos, rentamos ni compartimos tus datos personales con terceros para fines distintos, salvo que:</p>
+    <ul>
+      <li>Sea requerido por autoridad competente conforme a la ley;</li>
+      <li>Sea necesario para proteger los derechos, propiedad o seguridad de Tecnológico de Monterrey, de las personas usuarias o del público; o</li>
+      <li>Contemos con tu consentimiento expreso para un fin distinto.</li>
+    </ul>
+    <p>No utilizamos proveedores externos de hosting, envío de correos, análisis o servicios similares que impliquen una transferencia o encargo adicional de tus datos personales.</p>
+    <h2>6. Moderación y publicación de contenido</h2>
+    <p>Todas las publicaciones son revisadas por un equipo de administración antes de aparecer en el Tablón. Nos reservamos el derecho de aprobar, rechazar, editar o eliminar cualquier publicación que incumpla nuestros Términos de Uso, sin que ello genere responsabilidad alguna para Tecnológico de Monterrey.</p>
+    <h2>7. Conservación de los datos</h2>
+    <p>Tus datos se conservarán mientras tu publicación esté activa en el Tablón y durante el plazo adicional de 6 meses necesario para atender responsabilidades legales, resolver controversias o dar seguimiento a reportes de abuso. Transcurrido este plazo, tus datos serán eliminados o anonimizados de forma segura.</p>
+    <h2>8. Derechos ARCO y revocación del consentimiento</h2>
+    <p>Tienes derecho a <strong>Acceder, Rectificar y Cancelar</strong> tus datos personales, así como a <strong>Oponerte</strong> al uso de los mismos para fines específicos (derechos ARCO), y a <strong>revocar tu consentimiento</strong> en cualquier momento.</p>
+    <p>Para ejercer estos derechos, envía una solicitud a tatarear@servicios.tec.mx, indicando: tu nombre y correo electrónico asociado a la publicación; una descripción clara del derecho que deseas ejercer; y cualquier documento que facilite localizar tus datos.</p>
+    <p>Responderemos tu solicitud en un plazo máximo de 20 días hábiles, conforme a la ley, y de proceder, haremos efectiva la solicitud dentro de los 15 días hábiles siguientes.</p>
+    <p>Si consideras que tu derecho a la protección de datos personales ha sido lesionado, tienes derecho a acudir ante la autoridad competente. A partir de 2025, dicha autoridad es la <strong>Secretaría Anticorrupción y Buen Gobierno</strong>, que asumió las funciones que anteriormente correspondían al INAI en materia de protección de datos en posesión de particulares.</p>
+    <h2>9. Menores de edad</h2>
+    <p>El Tablón está dirigido exclusivamente a personas mayores de 18 años. Si tienes conocimiento de que una persona menor de edad ha compartido datos personales a través del Tablón, contáctanos para proceder a su eliminación.</p>
+    <h2>10. Cambios al Aviso de Privacidad</h2>
+    <p>Nos reservamos el derecho de actualizar este Aviso de Privacidad. Cualquier modificación será publicada en esta misma página, indicando la fecha de la última actualización.</p>
+  </div>
+</div>
+
+<div class="legal-overlay" id="legal-terminos" hidden>
+  <div class="legal-box">
+    <button class="legal-close" aria-label="Cerrar">✕</button>
+    <div class="legal-kicker">Tec de Monterrey · Generación 2026</div>
+    <h1>Términos de Uso del Tablón de Ayuda</h1>
+    <p class="legal-updated"><strong>Última actualización:</strong> 29 de julio de 2026</p>
+    <h2>1. Aceptación de los términos</h2>
+    <p>Al usar el sitio Tatarear (el "Sitio") y publicar contenido en el Tablón, aceptas quedar obligado(a) por estos Términos de Uso y por el Aviso de Privacidad. Si no estás de acuerdo, no debes usar el Sitio.</p>
+    <h2>2. Descripción del servicio</h2>
+    <p>El Sitio permite a las personas usuarias publicar mensajes solicitando u ofreciendo ayuda a la comunidad, incluyendo su correo electrónico o teléfono y algunos datos personales, para que otras personas interesadas puedan contactarlas. <strong>Toda publicación pasa por un proceso de revisión y aprobación por parte de nuestro equipo de administración antes de hacerse pública.</strong></p>
+    <p>Tecnológico de Monterrey <strong>no es intermediario, garante ni parte</strong> de los acuerdos, transacciones o interacciones que resulten entre personas usuarias del Tablón; únicamente facilita la conexión inicial entre quienes ofrecen y quienes solicitan ayuda.</p>
+    <h2>3. Requisitos para publicar</h2>
+    <p>Para publicar en el Tablón, la persona usuaria declara y garantiza que es mayor de 18 años; los datos e información proporcionados son verídicos, exactos y actualizados; cuenta con capacidad legal para asumir las obligaciones aquí descritas; y el correo electrónico o teléfono proporcionado le pertenece o cuenta con autorización para usarlo.</p>
+    <h2>4. Proceso de moderación</h2>
+    <p>Toda publicación será revisada antes de aparecer en el Tablón. Nos reservamos el derecho, a nuestra entera discreción y sin necesidad de justificar la decisión, de aprobar o rechazar cualquier publicación; editar contenido por motivos de formato, claridad o cumplimiento de estos Términos; eliminar publicaciones ya aprobadas si posteriormente se detecta que incumplen estos Términos o el Aviso de Privacidad; o suspender o dar de baja publicaciones a solicitud de la persona usuaria.</p>
+    <p>El tiempo de revisión puede variar; no garantizamos un plazo específico de aprobación.</p>
+    <h2>5. Contenido prohibido</h2>
+    <p>Queda prohibido publicar contenido que sea falso, engañoso, difamatorio, discriminatorio, violento u ofensivo; promueva actividades ilegales, fraude, extorsión o cualquier forma de explotación; incluya datos personales sensibles propios o de terceros sin su consentimiento; tenga fines comerciales, publicitarios o de venta ajenos al propósito del Tablón, salvo que esté expresamente permitido; infrinja derechos de propiedad intelectual, privacidad o cualquier otro derecho de terceros; o solicite información financiera sensible (contraseñas, datos bancarios, tarjetas) de otras personas usuarias.</p>
+    <h2>6. Contacto entre personas usuarias</h2>
+    <p>Una vez aprobada tu publicación, otras personas usuarias podrán contactarte por correo electrónico o teléfono para ofrecer o solicitar ayuda. <strong>Cualquier interacción, acuerdo, intercambio o encuentro que resulte de dicho contacto es responsabilidad exclusiva de las personas involucradas.</strong> Recomendamos verificar la identidad de la otra persona antes de compartir información adicional; no compartir datos financieros, contraseñas o información sensible por correo o teléfono; preferir encuentros en lugares públicos si la ayuda implica un encuentro presencial; y reportarnos cualquier conducta sospechosa, abusiva o fraudulenta a tatarear@servicios.tec.mx.</p>
+    <h2>7. Limitación de responsabilidad</h2>
+    <p>Tecnológico de Monterrey pone a disposición el Tablón como un espacio de conexión comunitaria, pero <strong>no verifica de forma exhaustiva</strong> la veracidad de las publicaciones, la identidad de las personas usuarias, ni la calidad, legalidad o seguridad de la ayuda ofrecida o recibida. En la máxima medida permitida por la ley aplicable, Tecnológico de Monterrey no será responsable por daños, perjuicios, pérdidas o conflictos derivados del contacto o interacción entre personas usuarias del Tablón.</p>
+    <h2>8. Eliminación de publicaciones y cuentas</h2>
+    <p>Puedes solicitar la eliminación de tu publicación y de tus datos personales en cualquier momento escribiendo a tatarear@servicios.tec.mx. Nosotros también podemos eliminar publicaciones que incumplan estos Términos, sin previo aviso.</p>
+    <h2>9. Propiedad intelectual</h2>
+    <p>El diseño, estructura, logotipos y contenido propio del Sitio son propiedad de Tecnológico de Monterrey o de sus licenciantes. Las personas usuarias conservan los derechos sobre el contenido de sus publicaciones, pero otorgan a Tecnológico de Monterrey una licencia no exclusiva para mostrar dicho contenido en el Tablón mientras esté activo.</p>
+    <h2>10. Modificaciones a los Términos</h2>
+    <p>Podemos actualizar estos Términos de Uso en cualquier momento. Los cambios se publicarán en esta página con su fecha de actualización. El uso continuado del Sitio después de dichos cambios implica su aceptación.</p>
+    <h2>11. Legislación aplicable y jurisdicción</h2>
+    <p>Estos Términos se rigen por las leyes de los Estados Unidos Mexicanos. Para cualquier controversia, las partes se someten a los tribunales competentes de Monterrey, Nuevo León.</p>
+    <h2>12. Contacto</h2>
+    <p>Para dudas, comentarios o reportes relacionados con el Tablón, escríbenos a tatarear@servicios.tec.mx.</p>
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
