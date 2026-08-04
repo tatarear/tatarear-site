@@ -1,0 +1,13 @@
+{
+  "actualizado": "2026-08-03T00:00:00Z",
+  "offerPosts": [
+    { "tag": "Mentoría", "desc": "Ofrezco asesorías de finanzas personales para egresados que están armando su primer presupuesto.", "meta": "Ana — Monterrey" },
+    { "tag": "Empleo", "desc": "Tengo dos vacantes de prácticas en mi empresa para egresados de Ingeniería Industrial.", "meta": "Rodrigo — Linares" },
+    { "tag": "Educación", "desc": "Doy clases gratuitas de inglés conversacional los sábados por videollamada.", "meta": "Fernanda — Saltillo" }
+  ],
+  "seekPosts": [
+    { "tag": "Negocio / emprendimiento", "desc": "Busco a alguien con experiencia en contabilidad para orientar el changarro de mi familia.", "meta": "Diego — Montemorelos" },
+    { "tag": "Salud", "desc": "Mi comunidad necesita orientación para tramitar apoyos de salud para adultos mayores.", "meta": "Lupita — García" },
+    { "tag": "Mentoría", "desc": "Busco mentoría para preparar mi solicitud a una maestría en el extranjero.", "meta": "Emilio — Santa Catarina" }
+  ]
+}
