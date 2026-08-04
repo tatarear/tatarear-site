@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tatarear — Conecta, Julio 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0A1B45;
+    --navy-mid:#122a63;
+    --blue-royal:#1E4FA0;
+    --blue-bright:#3568c4;
+    --blue-sky:#4a7fd1;
+    --gold:#c9a961;
+    --gold-light:#e2cd93;
+    --cream:#f7f4ec;
+    --paper:#fbf9f4;
+    --ink:#101632;
+    --ink-soft:#3a4270;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Work Sans', sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  .serif{font-family:'Fraunces', serif;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  /* ---------- NAV ---------- */
+  .site-nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 5vw;
+    transition:background .4s ease, padding .4s ease, box-shadow .4s ease;
+  }
+  .site-nav.solid{
+    background:rgba(10,27,69,0.94);
+    padding:14px 5vw;
+    box-shadow:0 4px 24px rgba(0,0,0,0.25);
+    backdrop-filter:blur(6px);
+  }
+  .nav-mark{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:1.3rem;
+    color:var(--gold-light);
+    letter-spacing:0.01em;
+  }
+  .nav-mark span{color:#fff; font-style:normal; font-weight:300; opacity:.7; font-size:0.85rem; margin-left:8px;}
+  .nav-links{display:flex; gap:8px; align-items:center;}
+  .nav-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.09em;
+    text-transform:uppercase;
+    color:#fff;
+    padding:9px 16px;
+    border:1px solid rgba(255,255,255,0.25);
+    border-radius:3px;
+    transition:all .25s ease;
+  }
+  .nav-links a:hover{ border-color:var(--gold); color:var(--gold-light); background:rgba(255,255,255,0.05); }
+  .nav-links a.cta{ background:var(--gold); color:var(--navy-deep); border-color:var(--gold); font-weight:500;}
+  .nav-links a.cta:hover{ background:var(--gold-light); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    height:100vh;
+    min-height:640px;
+    display:flex; align-items:center; justify-content:flex-start;
+    overflow:hidden;
+    background:var(--navy-deep);
+  }
+  .hero-video-layer{
+    position:absolute; inset:0; z-index:0;
+    background-image:
+      linear-gradient(180deg, rgba(10,27,69,0.30), rgba(10,27,69,0.55) 55%, rgba(10,27,69,0.88)),
+      url('assets/hero-bg.jpg');
+    background-size:cover;
+    background-position:center 22%;
+    background-repeat:no-repeat;
+  }
+  /* PLACEHOLDER LIGERO: frame comprimido (~23KB) del video oficial, usado como fondo
+     provisional del hero mientras el video final está listo.
+     Hook real: sustituye este div por <video autoplay muted loop playsinline
+     poster="frame-placeholder.jpg"><source src="video-final.mp4" type="video/mp4"></video>
+     dentro de .hero-video-layer. El degradado se queda como overlay de legibilidad
+     encima del video. */
+
+  .hero-content{
+    position:relative; z-index:2;
+    width:100%;
+    padding:0 5vw;
+    display:flex; justify-content:flex-start;
+  }
+  .dict-card{
+    background:rgba(10,27,69,0.36);
+    max-width:620px;
+    width:100%;
+    padding:44px 42px 38px;
+    border-radius:6px;
+    box-shadow:0 30px 70px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.14);
+    border-left:5px solid var(--gold);
+    border-top:1px solid rgba(255,255,255,0.16);
+    border-right:1px solid rgba(255,255,255,0.16);
+    border-bottom:1px solid rgba(255,255,255,0.16);
+    backdrop-filter:blur(18px) saturate(150%);
+    -webkit-backdrop-filter:blur(18px) saturate(150%);
+    transition:opacity .25s linear, transform .25s linear;
+  }
+  .dict-eyebrow{
+    font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--gold-light); margin-bottom:14px; display:block;
+  }
+  .dict-word{
+    font-size:clamp(2.6rem, 6vw, 4.2rem);
+    font-weight:500;
+    color:#fff;
+    line-height:0.95;
+    margin-bottom:10px;
+  }
+  .dict-tags{
+    color:rgba(247,244,236,0.78);
+    font-size:0.85rem;
+    margin-bottom:20px;
+  }
+  .dict-tags em{font-style:italic;}
+  .dict-etym{
+    font-size:0.92rem;
+    color:rgba(247,244,236,0.82);
+    margin-bottom:22px;
+    padding-bottom:22px;
+    border-bottom:1px solid rgba(255,255,255,0.18);
+  }
+  .dict-etym strong{color:#fff; font-weight:600;}
+  .dict-defs{list-style:none; counter-reset:def;}
+  .dict-defs li{
+    counter-increment:def;
+    position:relative;
+    padding-left:34px;
+    margin-bottom:16px;
+    font-size:1.02rem;
+    color:rgba(247,244,236,0.94);
+  }
+  .dict-defs li::before{
+    content:counter(def);
+    position:absolute; left:0; top:0;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    color:var(--gold);
+    font-size:1.05rem;
+  }
+  .dict-defs li:last-child{margin-bottom:0;}
+
+  .scroll-cue{
+    position:absolute; bottom:36px; left:5vw; z-index:2;
+    color:rgba(255,255,255,0.75);
+    font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase;
+    display:flex; align-items:center; gap:10px;
+    transition:opacity .3s ease;
+  }
+  .scroll-cue .line{width:32px; height:1px; background:var(--gold);}
+
+  /* ---------- SECTION SHARED ---------- */
+  .section{ padding:120px 5vw; position:relative; }
+  .section-inner{ max-width:1080px; margin:0 auto; }
+  .section-dark{ background:var(--navy-deep); color:#f4f2ea; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .eyebrow::before{content:""; width:24px; height:1px; background:var(--gold);}
+  .section-dark .eyebrow{color:var(--gold-light);}
+  h2.headline{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:clamp(2.1rem, 4vw, 3.2rem);
+    color:var(--navy-deep);
+    line-height:1.08;
+    margin-bottom:8px;
+  }
+  .section-dark h2.headline{color:#fff;}
+
+  /* ---------- SEMBLANZA (pagina propia) ---------- */
+  [hidden]{ display:none !important; }
+  .back-link{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem;
+    letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--blue-royal); margin-bottom:28px;
+    transition:color .2s ease;
+  }
+  .back-link:hover{ color:var(--gold); }
+  .back-link .arrow{ display:inline-block; transition:transform .2s ease; }
+  .back-link:hover .arrow{ transform:translateX(-3px); }
+  .semblanza-page-grid{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:56px;
+    margin-top:44px;
+    align-items:start;
+  }
+  .semblanza-photo img{
+    width:100%;
+    border-radius:2px;
+    border:1px solid rgba(201,169,97,0.4);
+    box-shadow:0 24px 55px rgba(0,0,0,0.28);
+  }
+  .semblanza-photo-caption{
+    margin-top:14px; font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem; letter-spacing:0.06em; color:var(--ink-soft); line-height:1.5;
+  }
+  /* ---------- DISCURSO (pagina propia) ---------- */
+  .discurso-body{ max-width:760px; margin:44px auto 0; font-size:1.06rem; color:var(--ink); }
+  .discurso-body p{ margin:0 0 24px; }
+  .discurso-body p.pull{
+    font-family:'Fraunces', serif; font-style:italic;
+    font-size:1.3rem; color:var(--blue-royal);
+  }
+  .discurso-body p.pull-sm{
+    font-family:'Fraunces', serif; font-style:italic;
+    font-size:1.15rem; color:var(--blue-royal);
+  }
+
+  .semblanza-prose p{
+    font-size:1.06rem;
+    color:var(--ink);
+    margin-bottom:24px;
+    max-width:700px;
+  }
+  .semblanza-prose p:last-child{ margin-bottom:0; }
+
+  /* ---------- RETO ---------- */
+  .reto-intro{ max-width:640px; }
+  .reto-intro p{ font-size:1.08rem; color:rgba(244,242,234,0.85); margin-top:18px; }
+  .reto-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:64px;
+    margin-top:64px;
+    align-items:start;
+  }
+  form.share-form{ display:flex; flex-direction:column; gap:20px; }
+  .field{ display:flex; flex-direction:column; gap:8px; }
+  .field label{
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-light);
+  }
+  .field input, .field textarea{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.22);
+    border-radius:2px;
+    padding:13px 14px;
+    color:#fff;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.95rem;
+    resize:vertical;
+  }
+  .field input::placeholder, .field textarea::placeholder{ color:rgba(255,255,255,0.35); }
+  .field input:focus, .field textarea:focus{
+    outline:none; border-color:var(--gold);
+    background:rgba(255,255,255,0.09);
+  }
+  .submit-btn{
+    align-self:flex-start;
+    background:var(--gold);
+    color:var(--navy-deep);
+    border:none;
+    padding:14px 30px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.1em; text-transform:uppercase;
+    font-weight:500;
+    border-radius:2px;
+    cursor:pointer;
+    transition:background .25s ease, transform .15s ease;
+  }
+  .submit-btn:hover{ background:var(--gold-light); transform:translateY(-1px); }
+  .form-note{
+    margin-top:4px; font-size:0.82rem; color:rgba(255,255,255,0.55);
+    display:none;
+  }
+  .form-note.show{ display:block; color:var(--gold-light); }
+
+  .wall{ display:flex; flex-direction:column; gap:0; }
+  .wall-label{
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem;
+    letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.45);
+    margin-bottom:18px;
+  }
+  .wall-entry{
+    padding:20px 0;
+    border-top:1px solid rgba(255,255,255,0.12);
+  }
+  .wall-entry:last-child{ border-bottom:1px solid rgba(255,255,255,0.12); }
+  .wall-entry p.msg{ font-size:0.98rem; color:rgba(244,242,234,0.9); margin-bottom:10px; }
+  .wall-entry .meta{
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem;
+    letter-spacing:0.06em; color:var(--gold-light); text-transform:uppercase;
+  }
+
+  /* ---------- CONECTA ---------- */
+  .tabs{ display:flex; gap:2px; margin-top:44px; margin-bottom:0; width:fit-content; }
+  .tab{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase;
+    padding:14px 26px;
+    background:rgba(255,255,255,0.05);
+    color:rgba(255,255,255,0.6);
+    border:1px solid rgba(255,255,255,0.18);
+    cursor:pointer;
+    transition:all .25s ease;
+  }
+  .tab.active{ background:var(--gold); color:var(--navy-deep); border-color:var(--gold); font-weight:500; }
+  .tab:not(.active):hover{ color:#fff; border-color:rgba(255,255,255,0.4); }
+
+  .conecta-panel{
+    margin-top:44px;
+    display:grid;
+    grid-template-columns:1fr 1.15fr;
+    gap:64px;
+    align-items:start;
+  }
+  .field select{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.22);
+    border-radius:2px;
+    padding:13px 14px;
+    color:#fff;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.95rem;
+    appearance:none;
+  }
+  .field select:focus{ outline:none; border-color:var(--gold); }
+  .field select option{ background:var(--navy-deep); color:#fff; }
+
+  .board-label{
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem;
+    letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.45);
+    margin-bottom:18px;
+    display:flex; justify-content:space-between;
+  }
+  .board-columns{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .board-col-title{
+    font-family:'Fraunces', serif; font-style:italic; font-weight:500;
+    font-size:1.1rem; color:var(--gold-light); margin-bottom:16px;
+  }
+  .board-card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.14);
+    border-left:3px solid var(--blue-sky);
+    padding:18px 18px;
+    margin-bottom:14px;
+    border-radius:2px;
+  }
+  .board-card.seeking{ border-left-color:var(--gold); }
+  .board-card .tag{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.62rem; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--navy-deep);
+    background:var(--blue-sky);
+    padding:3px 8px;
+    border-radius:2px;
+    margin-bottom:10px;
+  }
+  .board-card.seeking .tag{ background:var(--gold-light); }
+  .board-card p.desc{ font-size:0.92rem; color:rgba(244,242,234,0.9); margin-bottom:10px; }
+  .board-card .meta{
+    font-family:'IBM Plex Mono', monospace; font-size:0.65rem;
+    letter-spacing:0.04em; color:rgba(255,255,255,0.5); text-transform:uppercase;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .board-card .connect-btn{
+    font-family:'IBM Plex Mono', monospace; font-size:0.62rem;
+    letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--gold-light);
+    border:1px solid rgba(201,169,97,0.5);
+    padding:5px 10px; border-radius:2px;
+    background:transparent; cursor:pointer;
+    transition:all .2s ease;
+  }
+  .board-card .connect-btn:hover{ background:var(--gold); color:var(--navy-deep); border-color:var(--gold); }
+
+  @media (max-width: 860px){
+    .conecta-panel{ grid-template-columns:1fr; gap:48px; }
+    .board-columns{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);
+    color:rgba(255,255,255,0.55);
+    padding:40px 5vw;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:0.8rem;
+    flex-wrap:wrap; gap:12px;
+  }
+  footer .mono{ letter-spacing:0.05em; }
+  .footer-legal{ display:flex; gap:20px; font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.05em; }
+
+  /* ---------- CONSENT + LEGAL MODALS ---------- */
+  .consent-field{ margin-bottom:8px; }
+  .consent-label{
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:0.82rem; color:rgba(244,242,234,0.75); cursor:pointer; line-height:1.5;
+  }
+  .consent-label input[type="checkbox"]{ margin-top:3px; flex-shrink:0; width:15px; height:15px; accent-color:var(--gold); }
+  .legal-link{ color:inherit; text-decoration:underline; }
+  .legal-link:hover{ color:var(--gold); }
+
+  .legal-modal-overlay{
+    position:fixed; inset:0; z-index:200;
+    background:rgba(10,27,69,0.7);
+    display:flex; align-items:center; justify-content:center;
+    padding:5vw;
+  }
+  .legal-modal-box{
+    background:var(--cream); max-width:760px; width:100%; max-height:85vh;
+    overflow:auto; border-radius:4px; padding:48px 44px; position:relative;
+    box-shadow:0 40px 90px rgba(0,0,0,0.5);
+  }
+  .legal-modal-close{
+    position:absolute; top:20px; right:20px; background:none; border:none;
+    font-size:1.4rem; color:var(--navy-deep); cursor:pointer; font-family:'IBM Plex Mono', monospace;
+  }
+  .legal-modal-content{ font-family:'Work Sans', sans-serif; color:#1a1a1a; line-height:1.6; }
+  .legal-kicker{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.08em;
+    color:#8a6d2f; text-transform:uppercase; margin-bottom:6px;
+  }
+  .legal-title{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.9rem; color:var(--navy-deep);
+    margin:0 0 20px; border-bottom:3px solid var(--gold); padding-bottom:14px;
+  }
+  .legal-modal-content h2{ color:var(--navy-deep); font-size:1.15rem; margin-top:30px; }
+  .legal-modal-content p{ margin:14px 0; }
+  .legal-modal-content ul{ margin:14px 0; padding-left:22px; }
+  .legal-modal-content li{ margin-bottom:6px; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px){
+    .semblanza-grid{ grid-template-columns:1fr; }
+    .avatar-block{ width:140px; height:140px; }
+    .avatar-block span{ font-size:2.4rem; }
+    .reto-grid{ grid-template-columns:1fr; gap:48px; }
+    .semblanza-page-grid{ grid-template-columns:1fr; gap:28px; }
+    .semblanza-photo{ max-width:220px; margin:0 auto; }
+    .dict-card{ padding:32px 26px 28px; }
+    .nav-links a{ padding:8px 11px; font-size:0.65rem; }
+    .nav-mark span{ display:none; }
+    .section{ padding:90px 6vw; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" id="siteNav">
+  <a href="#/" class="nav-mark">tatarear <span>· Generación 2026</span></a>
+  <div class="nav-links">
+    <a href="#/discurso">Discurso</a>
+    <a href="#/semblanza">Semblanza</a>
+    <a href="#reto" class="cta">Conecta</a>
+  </div>
+</nav>
+
+<div id="page-home" class="page">
+<header class="hero" id="inicio">
+  <div class="hero-video-layer" id="videoLayer"></div>
+  <div class="hero-content">
+    <div class="dict-card" id="dictCard">
+      <span class="dict-eyebrow">Discurso de graduación · Julio 2026</span>
+      <div class="dict-word">tatarear</div>
+      <div class="dict-tags"><em>verbo intransitivo/transitivo</em> · México</div>
+      <div class="dict-etym">
+        <strong>Etimología:</strong> fusión de <em>tararear</em> (canturrear una melodía de forma espontánea y alegre) y <em>tata</em> (voz afectiva para "abuelo" en varias regiones de México y Latinoamérica).
+      </div>
+      <ol class="dict-defs">
+        <li>Dar con generosidad e impacto, atendiendo de forma consciente las necesidades específicas de quien recibe. Hacer el bien mirando a quién, y a quién necesita qué.</li>
+        <li>Dar con amor y alegría lo que el otro realmente necesita, de manera espontánea, como quien camina contento y sin querer se le escapa una melodía.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="scroll-cue" id="scrollCue">
+    <span class="line"></span> Desliza para comenzar
+  </div>
+</header>
+
+<section class="section section-dark" id="reto">
+  <div class="section-inner">
+    <span class="eyebrow">Conecta</span>
+    <h2 class="headline">Ofrece o pide una mano</h2>
+    <div class="reto-intro">
+      <p>En su <a href="#/discurso" style="color:var(--gold-light); text-decoration:underline;">discurso</a>, Polo retó a la generación 2026 a practicar <em>tatarear</em>: dar con generosidad e impacto a quienes tienen cerca, atendiendo lo que de verdad necesitan. Este espacio conecta a quienes tienen algo que ofrecer con quienes lo están buscando — mentoría, empleo, un consejo, una mano.</p>
+    </div>
+
+    <div class="tabs" id="tabs">
+      <div class="tab active" data-mode="ofrezco">Ofrezco ayuda</div>
+      <div class="tab" data-mode="busco">Busco ayuda</div>
+    </div>
+
+    <div class="conecta-panel">
+      <form class="share-form" id="connectForm">
+        <div class="field">
+          <label for="cNombre">Nombre</label>
+          <input type="text" id="cNombre" placeholder="Tu nombre" required>
+        </div>
+        <div class="field">
+          <label for="cCategoria">Categoría</label>
+          <select id="cCategoria">
+            <option>Mentoría</option>
+            <option>Empleo</option>
+            <option>Educación</option>
+            <option>Salud</option>
+            <option>Negocio / emprendimiento</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="cCiudad">Ciudad / región</label>
+          <input type="text" id="cCiudad" placeholder="¿Desde dónde tatareas?">
+        </div>
+        <div class="field">
+          <label for="cDesc" id="descLabel">¿Qué ofreces?</label>
+          <textarea id="cDesc" rows="4" placeholder="Describe brevemente lo que ofreces y a quién puede servirle." required></textarea>
+        </div>
+        <div class="field">
+          <label for="cContacto">Contacto (correo o teléfono)</label>
+          <input type="text" id="cContacto" placeholder="Cómo pueden encontrarte">
+        </div>
+        <div class="field consent-field">
+          <label class="consent-label">
+            <input type="checkbox" id="cConsent" required>
+            <span>He leído y acepto el <a href="#" id="openAviso" class="legal-link">Aviso de Privacidad</a> y los <a href="#" id="openTerminos" class="legal-link">Términos de Uso</a>. Entiendo que mi correo electrónico será visible para otras personas usuarias interesadas en dar o recibir ayuda, y acepto ser contactado(a) con ese fin.</span>
+          </label>
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn">Publicar en el muro</button>
+        <div class="form-note" id="formNote">Gracias — tu publicación ya está en el muro.</div>
+      </form>
+
+      <div>
+        <div class="board-label"><span>Muro de la generación</span><span id="countLabel">6 publicaciones</span></div>
+        <div class="board-columns">
+          <div>
+            <div class="board-col-title">Ofrecen ayuda</div>
+            <div id="offerList">
+              <div class="board-card">
+                <span class="tag">Mentoría</span>
+                <p class="desc">Ofrezco asesorías de finanzas personales para egresados que están armando su primer presupuesto.</p>
+                <div class="meta"><span>Ana — Monterrey</span><button class="connect-btn">Conectar</button></div>
+              </div>
+              <div class="board-card">
+                <span class="tag">Empleo</span>
+                <p class="desc">Tengo dos vacantes de prácticas en mi empresa para egresados de Ingeniería Industrial.</p>
+                <div class="meta"><span>Rodrigo — Linares</span><button class="connect-btn">Conectar</button></div>
+              </div>
+              <div class="board-card">
+                <span class="tag">Educación</span>
+                <p class="desc">Doy clases gratuitas de inglés conversacional los sábados por videollamada.</p>
+                <div class="meta"><span>Fernanda — Saltillo</span><button class="connect-btn">Conectar</button></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="board-col-title">Buscan ayuda</div>
+            <div id="seekList">
+              <div class="board-card seeking">
+                <span class="tag">Negocio / emprendimiento</span>
+                <p class="desc">Busco a alguien con experiencia en contabilidad para orientar el changarro de mi familia.</p>
+                <div class="meta"><span>Diego — Montemorelos</span><button class="connect-btn">Conectar</button></div>
+              </div>
+              <div class="board-card seeking">
+                <span class="tag">Salud</span>
+                <p class="desc">Mi comunidad necesita orientación para tramitar apoyos de salud para adultos mayores.</p>
+                <div class="meta"><span>Lupita — García</span><button class="connect-btn">Conectar</button></div>
+              </div>
+              <div class="board-card seeking">
+                <span class="tag">Mentoría</span>
+                <p class="desc">Busco mentoría para preparar mi solicitud a una maestría en el extranjero.</p>
+                <div class="meta"><span>Emilio — Santa Catarina</span><button class="connect-btn">Conectar</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /page-home -->
+
+<div id="page-discurso" class="page" hidden>
+  <section class="section" id="discurso-page">
+    <div class="section-inner">
+      <a href="#/" class="back-link"><span class="arrow">&larr;</span> Volver al inicio</a>
+      <span class="eyebrow">Discurso</span>
+      <h2 class="headline">Tatarear</h2>
+      <div class="discurso-body">
+      <p>En este momento, mientras estamos aquí sentados, hay 800 millones de personas en el mundo que no saben si van a comer mañana y hay más gente muriendo de soledad que de hambre.</p>
+      <p>¡Vaya manera de empezar un mensaje de graduación!, no les cuento esto para aguitarles la ceremonia. Se los platico porque lo que hoy les voy a compartir tiene todo que ver con eso y con ustedes.</p>
+      <p>Pero eso viene después. Primero es lo primero, y lo primero es celebrar a los que están sentados aquí en la cancha.</p>
+      <p>Es un honor estar aquí en mi alma mater. Muy honrado con la invitación. Soy de Monclova, Coahuila, mejor conocido como Monclohollywood, matrícula 160452. En mis tiempos no había aire acondicionado en los salones, se fumaba dentro de los mismos y no había internet. Ustedes nacieron con todo esto resuelto. Y aun así, puedo apostar que hoy sienten exactamente lo mismo que yo sentí ese día, hace 34 años, mitad euforia, mitad terror. Bienvenidos al club. Ahí les va un spoiler: si se puede y les va a ir muy bien.</p>
+      <p>¡Qué increíble viaje de cuatro años están por concluir! Bueno, la mayoría lo hizo en 4 años. Porque hay quienes hicieron intercambios y concentraciones adicionales, y hay quienes le agarraron tanto cariño a ciertas materias que las cursaron varias veces.</p>
+      <p>Pero todos pasaron por las mismas estaciones: desde la primera lavadora donde descubrieron que la ropa roja y la blanca no son amigas, llegar a la clase de las siete con la marca de la almohada en la cara, abrir el refri a las once de la noche con hambre y encontrar media cebolla, un bote de cátsup, y un six de cerveza, tener que ser el terapeuta de tu roomie, las desveladas interminables para entregar un proyecto, además de tener que aguantar al tipo que se hizo pato durante todo el proyecto. Y qué me dicen de la última parada hace dos meses: tus papás bien contentos porque ya firmaste el título sin que supieran que no habías recibido los resultados del CENEVAL y todavía te faltaban 2 exámenes por presentar y 3 proyectos por entregar.</p>
+      <p>Tuvieron un recorrido lleno de aprendizajes, anécdotas y nuevos amigos, algunos llegaron con raspones, otros sin, pero todos los aquí presentes lograron llegar hoy a este destino, el esfuerzo encontró su recompensa y eso hay que celebrarlo.</p>
+      <p class="pull">¡Felicidades, graduandos!</p>
+      <p>Abro paréntesis: hay personas en esta ceremonia que llegaron aquí desde más lejos que los demás, no en kilómetros, pero sí en obstáculos. Mis queridos Líderes del Mañana. Han sido mi inspiración. Tienen mi cariño, y mi respeto: no están solos. Estaré presente cuando me necesiten. Cierro paréntesis.</p>
+      <p>Ustedes son la generación de la inteligencia artificial. A mí me tocó ser la generación del internet.</p>
+      <p>Recién salido del Tec, había cursos para aprender a usar Internet, lo que hoy equivale a ofrecer un curso para aprender a respirar. En uno de esos cursos, un instructor con cara de apocalipsis nos dijo: "Internet va a revolucionar todo. Muchos empleos van a desaparecer."</p>
+      <p>Tenía razón. Y no tenía razón. Sí desaparecieron empleos, incluso desaparecieron industrias. Pero hoy tenemos trabajos que en 1995 sonaban a ciencia ficción: "influencer", "creador de contenido", "growth hacker". Y ningún egresado del Tec se quedó sin comer, encontraron o crearon trabajos para esa nueva economía. Hoy es imposible imaginarse el mundo sin Instagram, TikTok, Spotify, Uber, WhatsApp, Netflix y Amazon.</p>
+      <p>El hype de la inteligencia artificial va por el mismo camino. Así que no se preocupen. Porque gracias a lo que experimentaron en el Tec desarrollaron habilidades transversales que no se vuelven obsoletas. La capacidad de aprender a desaprender y volver a aprender, el pensamiento crítico, el poder trabajar en equipo. Eso no lo reemplaza ningún algoritmo. Gracias a esas habilidades van a poder bailar al son que les toquen, y en muchos casos van a ser ustedes quienes escriban esos sones.</p>
+      <p>Mientras preparaba este discurso me puse a filosofar. El conocimiento y la tecnología no tienen intencionalidad, nosotros los humanos se la damos. Y cuando veo cómo la estamos usando, identifico tres grandes retos que enfrentamos como humanidad.</p>
+      <p>El primero es la desigualdad. Acabamos de presenciar al primer billonario (trillonario en inglés) de la historia que, dicho sea de paso, sin internet no tendría un solo peso. Y al mismo tiempo, 800 millones de personas viven con menos de tres dólares al día. La tecnología que creó esa fortuna es la misma que está acentuando esa brecha.</p>
+      <p>El segundo es la polarización. La polarización existe cuando creemos que el mundo se divide en dos grupos: los que piensan como yo… y los que están equivocados. Las redes sociales no inventaron esto, simplemente descubrieron que el enojo genera más clics que la empatía. Son amplificadoras de nuestros sesgos.</p>
+      <p>El tercero es la falta de sentido. La misma tecnología que nos ayudó a vivir treinta años más también nos trajo más soledad, más ansiedad, más depresión, y más personas preguntándose para qué vivir. Tenemos más años para vivir y menos razones para vivirlos. Algo no está cuadrando.</p>
+      <p>Perfecto, y ahora ¿cómo nos comemos todo esto? El común denominador de estos 3 grandes retos es la falta de humanidad.</p>
+      <p>Y esto conlleva a la siguiente pregunta: ¿qué significa ser humano?</p>
+      <p>Hice una lista de las personas que considero más humanas. Mi madre, profesores que me inspiraron, mi guía espiritual, líderes que transformaron sociedades. Traté de encontrar qué tenían en común. ¿Era el dinero? No. ¿El poder? Tampoco. ¿El talento? Sí, pero no. Lo que encontré fue algo mucho más simple: todos compartían una obsesión por mejorar la vida de alguien más.</p>
+      <p>Y ahí apareció otro dilema. No encontraba una palabra que capturara esa idea. Compasión era parte. Servir no bastaba. Generosidad se quedaba corta. Busqué y no encontré. Así que decidí inventarla.</p>
+      <p class="pull">La palabra es tatarear.</p>
+      <p>Tatarear significa generosidad con impacto: en palabras llanas, dar algo y asegurarse que pegue el chicle.</p>
+      <p>Mi abuela decía: haz el bien sin mirar a quien. Tatarear propone haz el bien conociendo y atendiendo las necesidades del quien.</p>
+      <p>Tatarear suena como a tararear, lo que haces cuando vas caminando alegre y sin querer te sale una melodía. Lleva la palabra tata, que en muchos lugares quiere decir abuelo; esta palabra sabe al amor de nuestros abuelos. Y suena a terapear, porque necesitamos cambiar aprendizajes adquiridos para poder ser más efectivos en el dar. Tatarear es dar con amor y con alegría lo que el otro necesita.</p>
+      <p>No la busquen en Google, acabo de inventarla hoy, para esta ceremonia. Es, desde ya, nuestra palabra.</p>
+      <p>Yo tatareo. Tú tatareas. Él tatarea. Nosotros tatareamos.</p>
+      <p>¡No puede ser!, último día en el Tec y todavía nos recetan un concepto nuevo. Abracémoslo, créanme, les va a servir.</p>
+      <p>Avanzamos como humanidad gracias a que muchas personas tatarearon antes que nosotros. Gente que puso al ser humano en el centro de sus decisiones y con eso le dio intencionalidad a la tecnología. Gracias a esto existen las vacunas, las universidades, las ciudades y todo lo que llamamos civilización.</p>
+      <p>En noviembre conocí a una gran persona, Dan Meyer. En 2009 vendió su negocio y abrió una fábrica en la zona más peligrosa de Cincinnati porque detectó que el desempleo era el principal problema.</p>
+      <p>La mayoría de los candidatos eran exconvictos. Dan los contrató, le llamó a su programa segunda oportunidad. Semanas después, la rotación era altísima. La reacción fácil hubiera sido: "qué mal agradecidos." Pero Dan se hizo la pregunta: ¿cuál es la causa raíz?</p>
+      <p>Descubrió que no tenían dónde vivir, ni transporte, ni crédito. Fue resolviendo cada problema, uno por uno, sin dejar de ser rentable.</p>
+      <p>Rayshun Holt, que pasó 18 años en prisión y lleva ocho en la fábrica, lo resume mejor que nadie: "Dicen que esto fue una segunda oportunidad. Para mí fue la primera en mi vida."</p>
+      <p>Lo que hizo Dan fue tatarear. No atacó los síntomas; buscó la causa raíz del problema. También enfrentó su mayor sesgo: pensar que una vez delincuente, siempre delincuente.</p>
+      <p>La forma de tatarear de Dan se llama capitalismo consciente: hacer el pastel más grande para que todos sus grupos de interés, incluidos los exconvictos, disfruten de una rebanada más grande.</p>
+      <p>Seamos honestos: esta idea no nació con Dan, ni con el capitalismo consciente. Es mucho más antigua. A mí me inspira una persona que vivió hace dos mil años y que nos invitaba a tatarearnos los unos a los otros. Aprendí a tatarear viendo a mi madre. Hace seis años me hice conductor de Uber, convencido de que sólo se puede tatarear bien cuando se aprende a escuchar mejor, y escuchar te permite eliminar sesgos.</p>
+      <p>Hace dos años renuncié a la dirección general de una gran empresa. Mucha gente me preguntó: "¿Por qué dejarías un puesto así?"</p>
+      <p>La respuesta es que descubrí algo demasiado tarde: tatarear me da más sentido y me hace sentir más pleno que cualquier cargo que haya tenido. Lo descubrí haciendo proyectos sociales que poco tenían que ver con mi trabajo y, cuando lo entendí, ya no me pude hacer pato.</p>
+      <p>No fue fácil soltar. Los incentivos de la sociedad premian más el acumular que el tatarear, y uno ha comprado estas ideas más de lo que uno quisiera admitir.</p>
+      <p>Mi esposa y yo nos fuimos un año a Harvard a aprender a tatarear mejor. Hoy dedico gran parte de mi tiempo a un proyecto llamado "Florece desde donde tú estás". Ayudamos a jóvenes del México rural a crear oportunidades donde otros sólo ven carencias.</p>
+      <p>Nunca me he arrepentido de tatarear. Me he arrepentido de no haber entendido las necesidades del otro o de no haber tatareado lo suficiente. Tatareo en silencio, a menos que al abrirlo pueda inspirar a alguien más a tatarear. No soy la Madre Teresa de Calcuta. De hecho, si le preguntan a mis hijos, probablemente les dirán que a ese señor todavía le falta tatarear más en casa.</p>
+      <p>¿Esto de tatarear tiene algún beneficio para el que tatarea?</p>
+      <p>Sí, y lo dice la ciencia: investigadores de Harvard, British Columbia, Oxford, Cambridge y Wisconsin concluyeron que tatarear —bueno, ellos tienen otros sinónimos para la palabra— genera felicidad. Es mejor tatarear que ser tatareado. Te da paz interior, duermes mejor, te enfermas menos, eres más feliz en tu trabajo, y tienes relaciones más duraderas. Tatarear reduce los prejuicios entre grupos que se perciben como adversarios. Ah, y además es contagioso.</p>
+      <p>Llegué a la conclusión de que tatarear tiene más propiedades que el nopal.</p>
+      <p>Ustedes dirán: yo qué me estoy graduando, ¿qué puedo tatarear? No tengo una fábrica, es más, todavía no tengo chamba. Se me ocurre utilizar el HTC para poner esto en práctica: H de Humanidad, T de Tiempo y C de Conocimiento.</p>
+      <p>Primero — tatarea tu humanidad. Como conductor de Uber descubrí que hay pasajeros que nunca te miran a los ojos. Para ellos eres invisible. Eso duele más que una grosería. Un buenos días, una sonrisa, ver a los ojos a alguien que el mundo ha decidido ignorar, eso es una forma de tatarear.</p>
+      <p>Segundo — tatarea tu tiempo. Llama a tu abuelo este fin de semana. Solo para preguntarle cómo está y decirle lo mucho que lo extrañas. Te vas a dar cuenta de la capacidad que tienes de iluminar otras vidas.</p>
+      <p>Tercero — tatarea tu conocimiento. Es el único bien que, al compartirse, no empobrece a quien lo da y sí enriquece a quien lo recibe. Mañana mismo puedes enseñarle a alguien que aún no ha descubierto cómo usar la inteligencia artificial.</p>
+      <p>Utiliza tu HTC (Humanidad, Tiempo y Conocimiento) a sabiendas de que hay N formas de tatarear, desde pequeños detalles hasta grandes esfuerzos, el dinero viene después. Lo importante es saber que tatarear es un músculo. Y como todo músculo, mientras más lo ejercitas, más crece.</p>
+      <p>Por último, quiero proponerles el Reto Tatara. Ninguno de ustedes llegó aquí solo; alguien tatareó por ustedes. De hecho, desde aquí alcanzo a ver a varios de sus cómplices que conspiraron para que tú estuvieras aquí.</p>
+      <p class="pull-sm">El reto es que, en 25 años, tatareen por alguien más, para que gracias a ustedes, alguien pueda venir a estudiar al Tec.</p>
+      <p>Invítenme a su reunión de generación de 25 años. Si no llego, mando a uno de mis hijos en mi representación para ver cómo nos fue con el reto. Y mientras tanto, cada vez que nos topemos, en la calle, en los tacos, o en el antro, la pregunta que me tienen que hacer es: ¿ya tatareaste hoy?</p>
+      <p>¿Y si sí? ¿Y si sí? ¿Y si todos tatareáramos al mismo tiempo? Este mundo sería irreconocible. Podríamos poner a la tecnología al servicio del ser humano. Las desigualdades desaparecerían. La polarización se reduciría. La gente encontraría más sentido a su vida. Así que empecemos, contagiemos a nuestra familia, a nuestra comunidad, a nuestro México y nuestro planeta.</p>
+      <p>Al final no seremos recordados por lo que acumulamos. Seremos recordados por lo que tatareamos.</p>
+      <p class="pull">Sin tatara, no hay paraíso.</p>
+      <p>Les deseo una vida llena de tatareo, y por lo tanto, una vida llena de felicidad. Dios los bendiga. Felicidades.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="page-semblanza" class="page" hidden>
+  <section class="section" id="semblanza-page">
+    <div class="section-inner">
+      <a href="#/" class="back-link"><span class="arrow">&larr;</span> Volver al inicio</a>
+      <span class="eyebrow">Orador invitado</span>
+      <h2 class="headline">Leopoldo &quot;Polo&quot; Cedillo Villarreal</h2>
+      <div class="semblanza-page-grid">
+        <div>
+          <div class="semblanza-photo">
+            <img src="assets/speaker.jpg" alt="Leopoldo Cedillo Villarreal en el podio de la ceremonia">
+          </div>
+          <div class="semblanza-photo-caption">Fotografía: frame del video oficial de la ceremonia, 06 de julio. Reemplazar por el retrato final cuando esté listo.</div>
+        </div>
+        <div class="semblanza-prose">
+          <p>Leopoldo Cedillo Villarreal, mejor conocido como Polo Cedillo, es orgulloso egresado del Tecnológico de Monterrey, donde estudió contaduría pública. También es Certified Public Accountant en el estado de Texas. Tiene una maestría en administración por Stanford University y recientemente concluyó el programa Advanced Leadership Initiative de Harvard University.</p>
+          <p>Durante veintinueve años desarrolló su carrera profesional en Grupo Proeza, organización mexicana con presencia global en los sectores automotriz, agroindustrial, salud y capital emprendedor. Los últimos 15 años ocupó posiciones de director general, primero como CEO de Metalsa y posteriormente como CEO de Proeza. Actualmente es consejero independiente de empresas como Bocar, Cuprum, Grupo Industrial Saltillo y Merco y mantiene una participación activa en el TEC.</p>
+          <p>Preside el Consejo de la Escuela de Ingeniería y forma parte del Consejo Académico y de Investigación, así como del Consejo del Grupo Educativo. Es padrino de la novena generación de líderes del mañana que se gradúa hoy. A lo largo de su trayectoria, también impulsó el desarrollo económico de Nuevo León, presidiendo el clúster automotriz y siendo fundador de Nuevo León 4.0, además de crear en CAINTRA el programa Más Pymex, iniciativa que ha apoyado a más de 100 pequeñas y medianas empresas mexicanas.</p>
+          <p>En 2024, sin embargo, tomó una decisión poco común para alguien con esa trayectoria; renunció a su carrera ejecutiva y se mudó a Harvard durante un año para darle forma, junto con su esposa Esther, a un proyecto que busca crear oportunidades para jóvenes de comunidades rurales de México, bajo una idea sencilla pero poderosa idea: florece desde donde estés. Lo más importante es que hasta esta mañana sigue felizmente casado con esa misma Esther, es padre de tres hijos, Polo, Ana Paula y Marcelo, y mantiene una calificación de cinco estrellas como conductor de Uber.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="mono">Tecnológico de Monterrey · Campus Monterrey</div>
+  <div class="mono">Ceremonia de graduación · Julio 2026</div>
+  <div class="footer-legal">
+    <a href="#" id="openAvisoFooter" class="legal-link">Aviso de privacidad</a>
+    <a href="#" id="openTerminosFooter" class="legal-link">Términos de uso</a>
+  </div>
+</footer>
+
+
+<div id="modal-aviso" class="legal-modal-overlay" hidden>
+  <div class="legal-modal-box" role="dialog" aria-modal="true" aria-labelledby="aviso-title">
+    <button class="legal-modal-close" data-close-modal>&#10005;</button>
+    <div class="legal-modal-content">
+      <div class="legal-kicker">Tec de Monterrey · Generación 2026</div>
+      <h1 id="aviso-title" class="legal-title">Aviso de Privacidad</h1>
+      <p style="font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:#666;"><strong>Última actualización:</strong> 29 de julio de 2026</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">1. Identidad y domicilio del Responsable</h2>
+        <p><strong>Instituto Tecnológico y de Estudios Superiores de Monterrey</strong> (en adelante, "Tecnológico de Monterrey" o "nosotros"), con domicilio en Av. Eugenio Garza Sada 2501 Sur, Col. Tecnológico, C.P. 64849, Monterrey, Nuevo León, México, es el Responsable del tratamiento de tus datos personales, en términos de la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) y su Reglamento.</p>
+        <p>Para cualquier duda relacionada con este Aviso de Privacidad puedes contactarnos en: tatarear@servicios.tec.mx.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">2. Datos personales que recabamos</h2>
+        <p>A través del formulario del tablón de ayuda ("el Tablón"), recabamos los siguientes datos personales que tú nos proporcionas directamente:</p>
+        <ul><li>Nombre</li><li>Correo electrónico o teléfono</li><li>Descripción del tipo de ayuda que ofreces o necesitas</li><li>Ciudad o región</li></ul>
+        <p><strong>No solicitamos ni debes incluir en tu publicación datos personales sensibles</strong> (origen étnico o racial, estado de salud, información genética, creencias religiosas, filosóficas o morales, afiliación sindical, opiniones políticas, preferencia sexual, entre otros) salvo que tú mismo decidas compartirlos voluntariamente dentro del texto de tu publicación, bajo tu propia responsabilidad. Te recomendamos evitar incluir este tipo de información.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">3. Finalidades del tratamiento</h2>
+        <p>Tus datos personales serán utilizados para las siguientes finalidades, necesarias para el servicio que solicitas:</p>
+        <ul>
+          <li>Publicar tu mensaje en el Tablón, previa revisión y aprobación por parte de nuestro equipo de moderación.</li>
+          <li>Permitir que otras personas usuarias que deseen dar o recibir ayuda se pongan en contacto contigo a través de tu correo electrónico o teléfono.</li>
+          <li>Contactarte nosotros mismos para validar tu publicación, notificarte su aprobación o rechazo, o darle seguimiento.</li>
+          <li>Prevenir usos indebidos, fraudes o abusos del Tablón, y moderar el contenido conforme a nuestros Términos de Uso.</li>
+        </ul>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">4. Consentimiento para ser contactado(a)</h2>
+        <p>Al proporcionar tu correo electrónico o teléfono y enviar tu publicación, <strong>aceptas expresamente que:</strong></p>
+        <ul>
+          <li>Tu correo electrónico o teléfono podrá ser compartido con otra persona usuaria del Tablón cuando esta desee ofrecerte ayuda o solicitar la ayuda que tú ofreces, únicamente con ese propósito.</li>
+          <li>Podrás recibir mensajes de dichas personas directamente en tu correo o teléfono.</li>
+          <li>Nosotros podremos contactarte para fines de moderación, verificación o soporte relacionados con tu publicación.</li>
+        </ul>
+        <p>Puedes retirar este consentimiento en cualquier momento (ver sección 8), lo cual implicará la eliminación de tu publicación del Tablón.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">5. Transferencia de datos</h2>
+        <p>Como se describe en la sección 4, tu correo electrónico o teléfono se transfiere/comparte con otras personas usuarias del Tablón <strong>únicamente cuando exista interés mutuo de contacto para dar o recibir ayuda</strong>, y solo mientras tu publicación esté activa. No vendemos, rentamos ni compartimos tus datos personales con terceros para fines distintos, salvo que:</p>
+        <ul>
+          <li>Sea requerido por autoridad competente conforme a la ley;</li>
+          <li>Sea necesario para proteger los derechos, propiedad o seguridad de Tecnológico de Monterrey, de las personas usuarias o del público; o</li>
+          <li>Contemos con tu consentimiento expreso para un fin distinto.</li>
+        </ul>
+        <p>No utilizamos proveedores externos de hosting, envío de correos, análisis o servicios similares que impliquen una transferencia o encargo adicional de tus datos personales.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">6. Moderación y publicación de contenido</h2>
+        <p>Todas las publicaciones son revisadas por un equipo de administración antes de aparecer en el Tablón. Nos reservamos el derecho de aprobar, rechazar, editar o eliminar cualquier publicación que incumpla nuestros Términos de Uso, sin que ello genere responsabilidad alguna para Tecnológico de Monterrey.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">7. Conservación de los datos</h2>
+        <p>Tus datos se conservarán mientras tu publicación esté activa en el Tablón y durante el plazo adicional de 6 meses necesario para atender responsabilidades legales, resolver controversias o dar seguimiento a reportes de abuso. Transcurrido este plazo, tus datos serán eliminados o anonimizados de forma segura.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">8. Derechos ARCO y revocación del consentimiento</h2>
+        <p>Tienes derecho a <strong>Acceder, Rectificar y Cancelar</strong> tus datos personales, así como a <strong>Oponerte</strong> al uso de los mismos para fines específicos (derechos ARCO), y a <strong>revocar tu consentimiento</strong> en cualquier momento.</p>
+        <p>Para ejercer estos derechos, envía una solicitud a tatarear@servicios.tec.mx, indicando: tu nombre y correo electrónico asociado a la publicación; una descripción clara del derecho que deseas ejercer; y cualquier documento que facilite localizar tus datos.</p>
+        <p>Responderemos tu solicitud en un plazo máximo de 20 días hábiles, conforme a la ley, y de proceder, haremos efectiva la solicitud dentro de los 15 días hábiles siguientes.</p>
+        <p>Si consideras que tu derecho a la protección de datos personales ha sido lesionado, tienes derecho a acudir ante la autoridad competente. A partir de 2025, dicha autoridad es la <strong>Secretaría Anticorrupción y Buen Gobierno</strong>, que asumió las funciones que anteriormente correspondían al INAI en materia de protección de datos en posesión de particulares.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">9. Menores de edad</h2>
+        <p>El Tablón está dirigido exclusivamente a personas mayores de 18 años. Si tienes conocimiento de que una persona menor de edad ha compartido datos personales a través del Tablón, contáctanos para proceder a su eliminación.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">10. Cambios al Aviso de Privacidad</h2>
+        <p>Nos reservamos el derecho de actualizar este Aviso de Privacidad. Cualquier modificación será publicada en esta misma página, indicando la fecha de la última actualización.</p>
+    </div>
+  </div>
+</div>
+
+<div id="modal-terminos" class="legal-modal-overlay" hidden>
+  <div class="legal-modal-box" role="dialog" aria-modal="true" aria-labelledby="terminos-title">
+    <button class="legal-modal-close" data-close-modal>&#10005;</button>
+    <div class="legal-modal-content">
+      <div class="legal-kicker">Tec de Monterrey · Generación 2026</div>
+      <h1 id="terminos-title" class="legal-title">Términos de Uso del Tablón de Ayuda</h1>
+      <p style="font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:#666;"><strong>Última actualización:</strong> 29 de julio de 2026</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">1. Aceptación de los términos</h2>
+        <p>Al usar el sitio Tatarear (el "Sitio") y publicar contenido en el Tablón, aceptas quedar obligado(a) por estos Términos de Uso y por el Aviso de Privacidad. Si no estás de acuerdo, no debes usar el Sitio.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">2. Descripción del servicio</h2>
+        <p>El Sitio permite a las personas usuarias publicar mensajes solicitando u ofreciendo ayuda a la comunidad, incluyendo su correo electrónico o teléfono y algunos datos personales, para que otras personas interesadas puedan contactarlas. <strong>Toda publicación pasa por un proceso de revisión y aprobación por parte de nuestro equipo de administración antes de hacerse pública.</strong></p>
+        <p>Tecnológico de Monterrey <strong>no es intermediario, garante ni parte</strong> de los acuerdos, transacciones o interacciones que resulten entre personas usuarias del Tablón; únicamente facilita la conexión inicial entre quienes ofrecen y quienes solicitan ayuda.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">3. Requisitos para publicar</h2>
+        <p>Para publicar en el Tablón, la persona usuaria declara y garantiza que es mayor de 18 años; los datos e información proporcionados son verídicos, exactos y actualizados; cuenta con capacidad legal para asumir las obligaciones aquí descritas; y el correo electrónico o teléfono proporcionado le pertenece o cuenta con autorización para usarlo.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">4. Proceso de moderación</h2>
+        <p>Toda publicación será revisada antes de aparecer en el Tablón. Nos reservamos el derecho, a nuestra entera discreción y sin necesidad de justificar la decisión, de aprobar o rechazar cualquier publicación; editar contenido por motivos de formato, claridad o cumplimiento de estos Términos; eliminar publicaciones ya aprobadas si posteriormente se detecta que incumplen estos Términos o el Aviso de Privacidad; o suspender o dar de baja publicaciones a solicitud de la persona usuaria.</p>
+        <p>El tiempo de revisión puede variar; no garantizamos un plazo específico de aprobación.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">5. Contenido prohibido</h2>
+        <p>Queda prohibido publicar contenido que sea falso, engañoso, difamatorio, discriminatorio, violento u ofensivo; promueva actividades ilegales, fraude, extorsión o cualquier forma de explotación; incluya datos personales sensibles propios o de terceros sin su consentimiento; tenga fines comerciales, publicitarios o de venta ajenos al propósito del Tablón, salvo que esté expresamente permitido; infrinja derechos de propiedad intelectual, privacidad o cualquier otro derecho de terceros; o solicite información financiera sensible (contraseñas, datos bancarios, tarjetas) de otras personas usuarias.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">6. Contacto entre personas usuarias</h2>
+        <p>Una vez aprobada tu publicación, otras personas usuarias podrán contactarte por correo electrónico o teléfono para ofrecer o solicitar ayuda. <strong>Cualquier interacción, acuerdo, intercambio o encuentro que resulte de dicho contacto es responsabilidad exclusiva de las personas involucradas.</strong> Recomendamos verificar la identidad de la otra persona antes de compartir información adicional; no compartir datos financieros, contraseñas o información sensible por correo o teléfono; preferir encuentros en lugares públicos si la ayuda implica un encuentro presencial; y reportarnos cualquier conducta sospechosa, abusiva o fraudulenta a tatarear@servicios.tec.mx.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">7. Limitación de responsabilidad</h2>
+        <p>Tecnológico de Monterrey pone a disposición el Tablón como un espacio de conexión comunitaria, pero <strong>no verifica de forma exhaustiva</strong> la veracidad de las publicaciones, la identidad de las personas usuarias, ni la calidad, legalidad o seguridad de la ayuda ofrecida o recibida. En la máxima medida permitida por la ley aplicable, Tecnológico de Monterrey no será responsable por daños, perjuicios, pérdidas o conflictos derivados del contacto o interacción entre personas usuarias del Tablón.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">8. Eliminación de publicaciones y cuentas</h2>
+        <p>Puedes solicitar la eliminación de tu publicación y de tus datos personales en cualquier momento escribiendo a tatarear@servicios.tec.mx. Nosotros también podemos eliminar publicaciones que incumplan estos Términos, sin previo aviso.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">9. Propiedad intelectual</h2>
+        <p>El diseño, estructura, logotipos y contenido propio del Sitio son propiedad de Tecnológico de Monterrey o de sus licenciantes. Las personas usuarias conservan los derechos sobre el contenido de sus publicaciones, pero otorgan a Tecnológico de Monterrey una licencia no exclusiva para mostrar dicho contenido en el Tablón mientras esté activo.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">10. Modificaciones a los Términos</h2>
+        <p>Podemos actualizar estos Términos de Uso en cualquier momento. Los cambios se publicarán en esta página con su fecha de actualización. El uso continuado del Sitio después de dichos cambios implica su aceptación.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">11. Legislación aplicable y jurisdicción</h2>
+        <p>Estos Términos se rigen por las leyes de los Estados Unidos Mexicanos. Para cualquier controversia, las partes se someten a los tribunales competentes de Monterrey, Nuevo León.</p>
+        <h2 style="color:#0A1B45; font-size:1.15rem; margin-top:30px;">12. Contacto</h2>
+        <p>Para dudas, comentarios o reportes relacionados con el Tablón, escríbenos a tatarear@servicios.tec.mx.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---------- Aviso de Privacidad / Términos de Uso (modales) ----------
+  function openModal(id){
+    document.getElementById(id).hidden = false;
+  }
+  function closeModal(overlay){
+    overlay.hidden = true;
+  }
+  document.getElementById('openAviso').addEventListener('click', (e) => { e.preventDefault(); openModal('modal-aviso'); });
+  document.getElementById('openTerminos').addEventListener('click', (e) => { e.preventDefault(); openModal('modal-terminos'); });
+  document.getElementById('openAvisoFooter').addEventListener('click', (e) => { e.preventDefault(); openModal('modal-aviso'); });
+  document.getElementById('openTerminosFooter').addEventListener('click', (e) => { e.preventDefault(); openModal('modal-terminos'); });
+  document.querySelectorAll('.legal-modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(overlay); });
+    overlay.querySelector('[data-close-modal]').addEventListener('click', () => closeModal(overlay));
+  });
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.legal-modal-overlay').forEach(overlay => { if (!overlay.hidden) closeModal(overlay); });
+    }
+  });
+
+  // ---------- Router: Semblanza como pagina propia ----------
+  const nav = document.getElementById('siteNav');
+  const dictCard = document.getElementById('dictCard');
+  const scrollCue = document.getElementById('scrollCue');
+  const pageHome = document.getElementById('page-home');
+  const pageSemblanza = document.getElementById('page-semblanza');
+  const pageDiscurso = document.getElementById('page-discurso');
+  const heroHeight = () => window.innerHeight;
+  let onHome = true;
+
+  function route(){
+    const hash = location.hash;
+    const isSemblanza = hash === '#/semblanza';
+    const isDiscurso = hash === '#/discurso';
+    const isSubpage = isSemblanza || isDiscurso;
+    onHome = !isSubpage;
+    pageHome.hidden = isSubpage;
+    pageSemblanza.hidden = !isSemblanza;
+    pageDiscurso.hidden = !isDiscurso;
+
+    if (isSubpage) {
+      nav.classList.add('solid');
+      window.scrollTo(0, 0);
+    } else {
+      nav.classList.toggle('solid', window.scrollY > 40);
+      const targetId = hash.replace('#/', '').replace('#', '');
+      if (targetId) {
+        const el = document.getElementById(targetId);
+        if (el) requestAnimationFrame(() => el.scrollIntoView({ behavior: 'smooth' }));
+      }
+    }
+  }
+  window.addEventListener('hashchange', route);
+  route();
+
+  // Nav solid + dict-card (glass) fade while scrolling the home page.
+  // Hook real: cuando el <video> exista, puedes disparar este mismo fade en su
+  // evento 'play' ademas del scroll, para que la tarjeta desaparezca apenas arranque.
+  window.addEventListener('scroll', () => {
+    if (!onHome) return;
+    const y = window.scrollY;
+    nav.classList.toggle('solid', y > 40);
+
+    const fadeRange = heroHeight() * 0.65;
+    const progress = Math.min(y / fadeRange, 1);
+    dictCard.style.opacity = String(1 - progress);
+    dictCard.style.transform = `translateY(${progress * -40}px)`;
+    scrollCue.style.opacity = String(1 - Math.min(y / 200, 1));
+  }, { passive: true });
+
+  // Tab toggle between "Ofrezco ayuda" / "Busco ayuda"
+  const tabs = document.querySelectorAll('.tab');
+  const descLabel = document.getElementById('descLabel');
+  const submitBtn = document.getElementById('submitBtn');
+  let mode = 'ofrezco';
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      mode = tab.dataset.mode;
+      if (mode === 'ofrezco') {
+        descLabel.textContent = '¿Qué ofreces?';
+        document.getElementById('cDesc').placeholder = 'Describe brevemente lo que ofreces y a quién puede servirle.';
+        submitBtn.textContent = 'Publicar en el muro';
+      } else {
+        descLabel.textContent = '¿Qué necesitas?';
+        document.getElementById('cDesc').placeholder = 'Describe brevemente lo que necesitas y quién podría ayudarte.';
+        submitBtn.textContent = 'Publicar en el muro';
+      }
+    });
+  });
+
+  // ---------- Muro: conectado a SharePoint via Power Automate ----------
+  // Pega aqui las dos URLs que copiaste de los disparadores HTTP de tus flujos.
+  // Mientras esten vacias, el muro sigue mostrando los ejemplos de siempre
+  // y el formulario avisa que todavia no esta conectado (no se rompe nada).
+  const FLOW_SUBMIT_URL = ''; // URL del flujo "Recibir publicación" (POST)
+  const FLOW_READ_URL   = ''; // URL del flujo "Publicar muro" (GET)
+
+  const connectForm = document.getElementById('connectForm');
+  const offerList = document.getElementById('offerList');
+  const seekList = document.getElementById('seekList');
+  const formNote = document.getElementById('formNote');
+  const countLabel = document.getElementById('countLabel');
+
+  function renderCard(post) {
+    const card = document.createElement('div');
+    card.className = 'board-card' + (post.Modo === 'Busco' ? ' seeking' : '');
+    card.innerHTML = `
+      <span class="tag"></span>
+      <p class="desc"></p>
+      <div class="meta"><span></span><button class="connect-btn">Conectar</button></div>
+    `;
+    card.querySelector('.tag').textContent = post.Categoria || '';
+    card.querySelector('.desc').textContent = post.Descripcion || '';
+    card.querySelector('.meta span').textContent = [post.Nombre, post.Ciudad].filter(Boolean).join(' — ');
+    return card;
+  }
+
+  async function loadMuro() {
+    if (!FLOW_READ_URL) return; // sin URL todavia: se quedan los ejemplos estaticos
+    try {
+      const res = await fetch(FLOW_READ_URL);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const posts = await res.json();
+      offerList.innerHTML = '';
+      seekList.innerHTML = '';
+      posts.forEach(post => {
+        const card = renderCard(post);
+        (post.Modo === 'Busco' ? seekList : offerList).appendChild(card);
+      });
+      countLabel.textContent = `${posts.length} publicaciones`;
+    } catch (err) {
+      console.warn('No se pudo cargar el muro:', err);
+    }
+  }
+  loadMuro();
+
+  connectForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const payload = {
+      Nombre: document.getElementById('cNombre').value.trim() || 'Anónimo',
+      Categoria: document.getElementById('cCategoria').value,
+      Ciudad: document.getElementById('cCiudad').value.trim(),
+      Descripcion: document.getElementById('cDesc').value.trim(),
+      Contacto: document.getElementById('cContacto').value.trim(),
+      Modo: mode === 'ofrezco' ? 'Ofrezco' : 'Busco',
+    };
+    if (!payload.Descripcion) return;
+
+    if (!FLOW_SUBMIT_URL) {
+      formNote.textContent = 'El muro todavía no está conectado — pídele a Adolfo que termine el flujo de Power Automate.';
+      formNote.classList.add('show');
+      setTimeout(() => formNote.classList.remove('show'), 4500);
+      return;
+    }
+
+    submitBtn.disabled = true;
+    try {
+      const res = await fetch(FLOW_SUBMIT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      connectForm.reset();
+      formNote.textContent = 'Gracias — tu publicación está en revisión y aparecerá en el muro pronto.';
+      formNote.classList.add('show');
+      setTimeout(() => formNote.classList.remove('show'), 4500);
+    } catch (err) {
+      formNote.textContent = 'Algo falló al publicar. Intenta de nuevo en un momento.';
+      formNote.classList.add('show');
+      setTimeout(() => formNote.classList.remove('show'), 4500);
+      console.error(err);
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
