@@ -50,13 +50,20 @@
   function esc(s){
     return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
+  function connectHref(post){
+    const subject = `Muro Tatarear — quiero conectar (${post.tag})`;
+    const body = `Hola,\n\nMe interesa esta publicación del Muro Tatarear:\n\n"${post.desc}"\n— ${post.meta}\n\nMe gustaría que me pongan en contacto con esta persona.\n\nGracias.`;
+    return 'mailto:tatarear@servicios.tec.mx'
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(body);
+  }
   function renderPosts(selector, posts, isSeek){
     const container = document.querySelector(selector);
     if (!container) return;
     container.innerHTML = posts.map(p => (
       `<div class="muro-card${isSeek?' seek':''}"><span class="muro-tag">${esc(p.tag)}</span>` +
       `<p>${esc(p.desc)}</p><div class="muro-meta"><span>${esc(p.meta)}</span>` +
-      `<button class="muro-connect" type="button">Conectar</button></div></div>`
+      `<a class="muro-connect" href="${esc(connectHref(p))}">Conectar</a></div></div>`
     )).join('');
   }
   loadMuro();
