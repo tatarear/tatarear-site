@@ -1,5 +1,16 @@
 {
-  "actualizado": "2026-08-05T20:08:26.345Z",
-  "offerPosts": [],
+  "actualizado": "2026-08-05T20:15:10.001Z",
+  "offerPosts": [
+    {
+      "tag": "Mentoría",
+      "desc": "Test",
+      "meta": "Test — Test"
+    },
+    {
+      "tag": "Mentoría",
+      "desc": "Esto es una prueba del flujo Publicar en Github",
+      "meta": "Prueba flujo 3 — Monterrey"
+    }
+  ],
   "seekPosts": []
 }
