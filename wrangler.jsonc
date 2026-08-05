@@ -3,13 +3,6 @@
   "compatibility_date": "2026-08-01",
   "assets": {
     "directory": "./",
-    "not_found_handling": "404-page",
-    "exclude": [
-      ".git/**",
-      ".github/**",
-      ".wrangler/**",
-      "README.md",
-      "wrangler.jsonc"
-    ]
+    "not_found_handling": "404-page"
   }
 }
