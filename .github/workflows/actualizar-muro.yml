@@ -30,6 +30,7 @@ jobs:
               offerPosts,
               seekPosts
             };
+            fs.mkdirSync('assets/data', { recursive: true });
             fs.writeFileSync('assets/data/muro.json', JSON.stringify(out, null, 2));
           "
 
