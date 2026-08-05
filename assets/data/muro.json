@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-05T20:30:16.283Z",
+  "actualizado": "2026-08-05T20:33:18.573Z",
   "offerPosts": [
     {
       "tag": "Mentoría",
@@ -7,9 +7,9 @@
       "meta": "Test — Test"
     },
     {
-      "tag": "Mentoría",
-      "desc": "Esto es una prueba del flujo Publicar en Github",
-      "meta": "Prueba flujo 3 — Monterrey"
+      "tag": "Educación",
+      "desc": "Clases de preparación para examen de inglés",
+      "meta": "Mari — Monterrey"
     }
   ],
   "seekPosts": []
