@@ -1,0 +1,13 @@
+{
+  "name": "tatarear-site",
+  "compatibility_date": "2026-08-01",
+  "assets": {
+    "directory": "./",
+    "not_found_handling": "404-page"
+  },
+  "exclude": [
+    ".github/**",
+    "README.md",
+    "wrangler.jsonc"
+  ]
+}
