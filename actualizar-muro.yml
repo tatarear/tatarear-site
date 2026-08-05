@@ -1,0 +1,42 @@
+name: Actualizar muro
+
+on:
+  repository_dispatch:
+    types: [update-muro]
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Construir muro.json
+        run: |
+          cat <<'EOF' > /tmp/items.json
+          ${{ toJson(github.event.client_payload.posts) }}
+          EOF
+          node -e "
+            const fs = require('fs');
+            const items = JSON.parse(fs.readFileSync('/tmp/items.json', 'utf8'));
+            const toPost = i => ({
+              tag: i.Categoria,
+              desc: i.Descripcion,
+              meta: [i.Nombre, i.Ciudad].filter(Boolean).join(' — ')
+            });
+            const offerPosts = items.filter(i => i.Modo === 'Ofrezco').map(toPost);
+            const seekPosts = items.filter(i => i.Modo === 'Busco').map(toPost);
+            const out = {
+              actualizado: new Date().toISOString(),
+              offerPosts,
+              seekPosts
+            };
+            fs.writeFileSync('assets/data/muro.json', JSON.stringify(out, null, 2));
+          "
+
+      - name: Commit y push si hay cambios
+        run: |
+          git config user.name "tatarear-bot"
+          git config user.email "actions@github.com"
+          git add assets/data/muro.json
+          git diff --quiet --cached || git commit -m "Actualiza muro de la generación"
+          git push
