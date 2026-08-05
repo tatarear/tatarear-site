@@ -18,13 +18,14 @@ jobs:
           node -e "
             const fs = require('fs');
             const items = JSON.parse(fs.readFileSync('/tmp/items.json', 'utf8'));
+            const unwrap = v => (v && typeof v === 'object' && 'Value' in v) ? v.Value : v;
             const toPost = i => ({
-              tag: i.Categoria,
+              tag: unwrap(i.Categoria),
               desc: i.Descripcion,
               meta: [i.Nombre, i.Ciudad].filter(Boolean).join(' — ')
             });
-            const offerPosts = items.filter(i => i.Modo === 'Ofrezco').map(toPost);
-            const seekPosts = items.filter(i => i.Modo === 'Busco').map(toPost);
+            const offerPosts = items.filter(i => unwrap(i.Modo) === 'Ofrezco').map(toPost);
+            const seekPosts = items.filter(i => unwrap(i.Modo) === 'Busco').map(toPost);
             const out = {
               actualizado: new Date().toISOString(),
               offerPosts,
