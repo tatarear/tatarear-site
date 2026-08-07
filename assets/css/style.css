@@ -46,8 +46,8 @@ img{max-width:100%;display:block;}
 .dict-defs li{counter-increment:def;position:relative;padding-left:34px;margin-bottom:16px;font-size:13px;color:rgba(247,244,236,.94);}
 .dict-defs li:last-child{margin-bottom:0;}
 .dict-defs li::before{content:counter(def);position:absolute;left:0;top:0;font-family:'Fraunces',serif;font-weight:600;color:var(--gold);font-size:1.05rem;}
-.cue{opacity:1;transition:opacity .3s ease;position:absolute;bottom:36px;left:5vw;z-index:2;color:rgba(255,255,255,.75);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:10px;}
-.cue-line{width:32px;height:1px;background:var(--gold);display:inline-block;}
+.cue{opacity:1;transition:opacity .3s ease;position:absolute;bottom:36px;right:5vw;z-index:2;color:rgba(255,255,255,.82);font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:1rem;display:flex;align-items:center;gap:10px;}
+.cue-arrow{color:var(--gold);font-style:normal;font-size:1.1rem;}
 
 /* Section shells */
 .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:12px;}
