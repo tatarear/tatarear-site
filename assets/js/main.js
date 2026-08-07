@@ -60,6 +60,10 @@
   function renderPosts(selector, posts, isSeek){
     const container = document.querySelector(selector);
     if (!container) return;
+    if (!posts.length){
+      container.innerHTML = `<p class="muro-empty">${isSeek ? 'Aún no hay solicitudes de ayuda. Sé el primero en pedir una mano.' : 'Aún no hay publicaciones. Sé el primero en tatarear.'}</p>`;
+      return;
+    }
     container.innerHTML = posts.map(p => (
       `<div class="muro-card${isSeek?' seek':''}"><span class="muro-tag">${esc(p.tag)}</span>` +
       `<p>${esc(p.desc)}</p><div class="muro-meta"><span>${esc(p.meta)}</span>` +
