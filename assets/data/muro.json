@@ -1,10 +1,20 @@
 {
-  "actualizado": "2026-08-23T18:15:06.583Z",
+  "actualizado": "2026-08-23T18:30:10.950Z",
   "offerPosts": [
     {
       "tag": "Educación",
       "desc": "Clases de preparación para examen de inglés",
       "meta": "Mari — Monterrey"
+    },
+    {
+      "tag": "Mentoría",
+      "desc": "Ofrezco ayuda para mejorar cómo encontrar empleo y prepararte mejor para las entrevistas. ",
+      "meta": "Lidia Robles — Monterrey"
+    },
+    {
+      "tag": "Mentoría",
+      "desc": "Tengo 26 años de experiencia en la industria, internacional, múltiples proyectos, diferentes países, muchas vivencias desarrollando colegas tratando de impactar sus vidas. Siempre poniendo al ser humano como el centro.",
+      "meta": "Rodrigo Berlanga Zamarrón — Monterrey"
     }
   ],
   "seekPosts": []
