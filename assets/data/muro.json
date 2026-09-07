@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-09-07T23:00:09.744Z",
+  "actualizado": "2026-09-07T23:15:07.416Z",
   "offerPosts": [
     {
       "tag": "Educación",
@@ -17,10 +17,21 @@
       "meta": "Rodrigo Berlanga Zamarrón — Monterrey"
     },
     {
+      "tag": "Educación",
+      "desc": "Ofrezco asesorías en Conocimientos Marineros para la Universidad Naval",
+      "meta": "Adrian Esquivel Castañeda  — Cozumel "
+    },
+    {
       "tag": "Salud",
       "desc": "Salud emocional \nEscucha amorosa sin juicio. Un acompañamiento en la ayuda de procesos de vida, como duelos…",
       "meta": "Escucha activa, acompañamiento  — Torreón Coah"
     }
   ],
-  "seekPosts": []
+  "seekPosts": [
+    {
+      "tag": "Empleo",
+      "desc": "Busco empleo relacionado con la carrera de Ingeniería en Tecnología Computacionales ",
+      "meta": "Adrián Esquivel Castro — Monterrey "
+    }
+  ]
 }
